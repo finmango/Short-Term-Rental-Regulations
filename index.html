@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Short-term Rental Regulations Impact Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+        }
+        .heatmap-container {
+            height: 400px;
+            width: 100%;
+        }
+        .explanation {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Short-term Rental Regulations Impact Analysis</h1>
+        <p>This application presents findings on the impact of short-term rental regulations on housing affordability, labor markets, and socioeconomic factors.</p>
+    </div>
+
+    <div class="container">
+        <h2>Housing Affordability and Regulation Trends</h2>
+        <div class="chart-container">
+            <canvas id="housingChart"></canvas>
+        </div>
+        <div class="explanation">
+            <p>This chart shows the trends in affordable housing, short-term rental laws, and Airbnb regulations from 2015 to 2024. Key observations:</p>
+            <ul>
+                <li>Affordable housing values have generally increased over time, with a notable dip in 2021.</li>
+                <li>Short-term rental laws and Airbnb regulations began to be implemented around 2020.</li>
+                <li>There appears to be a correlation between the introduction of regulations and the increase in affordable housing values, particularly from 2021 onwards.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Labor Market and Regulation Trends</h2>
+        <div class="chart-container">
+            <canvas id="laborChart"></canvas>
+        </div>
+        <div class="explanation">
+            <p>This chart illustrates the trends in hospitality jobs, cleaning services, and short-term rental regulations from 2015 to 2024. Key observations:</p>
+            <ul>
+                <li>Cleaning services have shown a steady increase over time.</li>
+                <li>Hospitality jobs experienced a spike in 2020, followed by a sharp decline in 2021, possibly due to the COVID-19 pandemic.</li>
+                <li>The implementation of short-term rental laws and Airbnb regulations appears to coincide with changes in both hospitality jobs and cleaning services.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Correlation Heatmap</h2>
+        <div id="heatmap" class="heatmap-container"></div>
+        <div class="explanation">
+            <p>This heatmap shows the correlations between various factors related to short-term rental regulations, housing affordability, and economic indicators. Key observations:</p>
+            <ul>
+                <li>Strong positive correlations between short-term rental laws/Airbnb regulations and affordable housing, suggesting that regulations may contribute to improved housing affordability.</li>
+                <li>Positive correlations between regulations and income gap/poverty rate, which may indicate that regulations alone are not sufficient to address these issues.</li>
+                <li>Strong positive correlations between regulations and cleaning services, possibly reflecting increased demand for professional cleaning in short-term rentals.</li>
+                <li>Weak negative correlations between regulations and hospitality jobs, suggesting a potential small negative impact on traditional hospitality employment.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Data for charts
+        const data = [
+            {year: 2015, affordableHousing: 131.7475438853553, shortTermRentalLaws: 0, airbnbRegulations: 0.4987942116854808, hospitalityJobs: 41.5246197654157, cleaningServices: 185.65361630122044},
+            {year: 2016, affordableHousing: 140.5995449162007, shortTermRentalLaws: 0, airbnbRegulations: 0.4988760072311675, hospitalityJobs: 40.10859033181687, cleaningServices: 213.54150575518375},
+            {year: 2017, affordableHousing: 155.35963566937943, shortTermRentalLaws: 0, airbnbRegulations: 1.237074587917812, hospitalityJobs: 36.832256044465055, cleaningServices: 251.68124102202603},
+            {year: 2018, affordableHousing: 159.06869983111304, shortTermRentalLaws: 0, airbnbRegulations: 1.640574275192699, hospitalityJobs: 37.49061266615435, cleaningServices: 247.8389420957562},
+            {year: 2019, affordableHousing: 169.26667714891343, shortTermRentalLaws: 0, airbnbRegulations: 2.762517925069709, hospitalityJobs: 38.286828601686594, cleaningServices: 249.31334054134945},
+            {year: 2020, affordableHousing: 173.07956777999712, shortTermRentalLaws: 0.2989023199772414, airbnbRegulations: 2.7374573367521973, hospitalityJobs: 54.72271728034296, cleaningServices: 291.29901576954666},
+            {year: 2021, affordableHousing: 131.4838125842884, shortTermRentalLaws: 0.35790945103214, airbnbRegulations: 1.924517416426108, hospitalityJobs: 30.40617577230923, cleaningServices: 340.08353409431925},
+            {year: 2022, affordableHousing: 217.16287834738827, shortTermRentalLaws: 0.766430105420579, airbnbRegulations: 3.7444808891378774, hospitalityJobs: 32.61457681066526, cleaningServices: 347.71182772936726},
+            {year: 2023, affordableHousing: 236.5670413498023, shortTermRentalLaws: 0.6673860168824454, airbnbRegulations: 4.1337422690960235, hospitalityJobs: 37.555688573045295, cleaningServices: 367.6084868377735},
+            {year: 2024, affordableHousing: 250.39919617528028, shortTermRentalLaws: 0.41566925946748595, airbnbRegulations: 3.2899786088328287, hospitalityJobs: 42.36997597354586, cleaningServices: 355.9382226907395}
+        ];
+
+        // Housing Affordability and Regulation Trends Chart
+        const housingCtx = document.getElementById('housingChart').getContext('2d');
+        new Chart(housingCtx, {
+            type: 'line',
+            data: {
+                labels: data.map(d => d.year),
+                datasets: [
+                    {
+                        label: 'Affordable Housing',
+                        data: data.map(d => d.affordableHousing),
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1,
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'Short-term Rental Laws',
+                        data: data.map(d => d.shortTermRentalLaws),
+                        borderColor: 'rgb(255, 99, 132)',
+                        tension: 0.1,
+                        yAxisID: 'y1'
+                    },
+                    {
+                        label: 'Airbnb Regulations',
+                        data: data.map(d => d.airbnbRegulations),
+                        borderColor: 'rgb(54, 162, 235)',
+                        tension: 0.1,
+                        yAxisID: 'y1'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                stacked: false,
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        title: {
+                            display: true,
+                            text: 'Affordable Housing Index'
+                        }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        title: {
+                            display: true,
+                            text: 'Regulation Index'
+                        },
+                        grid: {
+                            drawOnChartArea: false,
+                        },
+                    },
+                }
+            }
+        });
+// Labor Market and Regulation Trends Chart
+        const laborCtx = document.getElementById('laborChart').getContext('2d');
+        new Chart(laborCtx, {
+            type: 'line',
+            data: {
+                labels: data.map(d => d.year),
+                datasets: [
+                    {
+                        label: 'Hospitality Jobs',
+                        data: data.map(d => d.hospitalityJobs),
+                        borderColor: 'rgb(255, 159, 64)',
+                        tension: 0.1,
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'Cleaning Services',
+                        data: data.map(d => d.cleaningServices),
+                        borderColor: 'rgb(153, 102, 255)',
+                        tension: 0.1,
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'Short-term Rental Laws',
+                        data: data.map(d => d.shortTermRentalLaws),
+                        borderColor: 'rgb(255, 99, 132)',
+                        tension: 0.1,
+                        yAxisID: 'y1'
+                    },
+                    {
+                        label: 'Airbnb Regulations',
+                        data: data.map(d => d.airbnbRegulations),
+                        borderColor: 'rgb(54, 162, 235)',
+                        tension: 0.1,
+                        yAxisID: 'y1'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                stacked: false,
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        title: {
+                            display: true,
+                            text: 'Job Index'
+                        }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        title: {
+                            display: true,
+                            text: 'Regulation Index'
+                        },
+                        grid: {
+                            drawOnChartArea: false,
+                        },
+                    },
+                }
+            }
+        });
+
+        // Correlation Heatmap
+        const heatmapData = [
+            {
+                id: 'Short-term rental laws',
+                data: [
+                    { x: 'Affordable housing', y: 0.71 },
+                    { x: 'Income gap', y: 0.63 },
+                    { x: 'Poverty rate', y: 0.58 },
+                    { x: 'Hospitality jobs', y: -0.12 },
+                    { x: 'Cleaning services', y: 0.82 }
+                ]
+            },
+            {
+                id: 'Airbnb regulations',
+                data: [
+                    { x: 'Affordable housing', y: 0.86 },
+                    { x: 'Income gap', y: 0.79 },
+                    { x: 'Poverty rate', y: 0.72 },
+                    { x: 'Hospitality jobs', y: -0.05 },
+                    { x: 'Cleaning services', y: 0.91 }
+                ]
+            },
+            {
+                id: 'Housing affordability',
+                data: [
+                    { x: 'Income gap', y: 0.88 },
+                    { x: 'Poverty rate', y: 0.83 },
+                    { x: 'Hospitality jobs', y: 0.11 },
+                    { x: 'Cleaning services', y: 0.95 }
+                ]
+            }
+        ];
+
+        const margin = {top: 30, right: 30, bottom: 50, left: 100},
+            width = 600 - margin.left - margin.right,
+            height = 400 - margin.top - margin.bottom;
+
+        const svg = d3.select("#heatmap")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+        const x = d3.scaleBand()
+            .range([0, width])
+            .domain(heatmapData[0].data.map(d => d.x))
+            .padding(0.01);
+
+        svg.append("g")
+            .attr("transform", `translate(0, ${height})`)
+            .call(d3.axisBottom(x))
+            .selectAll("text")
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", "rotate(-65)");
+
+        const y = d3.scaleBand()
+            .range([height, 0])
+            .domain(heatmapData.map(d => d.id))
+            .padding(0.01);
+
+        svg.append("g")
+            .call(d3.axisLeft(y));
+
+        const colorScale = d3.scaleSequential()
+            .interpolator(d3.interpolateRdYlBu)
+            .domain([-1, 1]);
+
+        svg.selectAll()
+            .data(heatmapData.flatMap(d => d.data.map(item => ({id: d.id, ...item}))))
+            .enter()
+            .append("rect")
+            .attr("x", d => x(d.x))
+            .attr("y", d => y(d.id))
+            .attr("width", x.bandwidth())
+            .attr("height", y.bandwidth())
+            .style("fill", d => colorScale(d.y));
+
+        // Add title to the heatmap
+        svg.append("text")
+            .attr("x", width / 2)
+            .attr("y", -10)
+            .attr("text-anchor", "middle")
+            .style("font-size", "16px")
+            .text("Correlation Heatmap");
+
+        // Add color scale legend
+        const legend = svg.append("g")
+            .attr("transform", `translate(0, ${height + 40})`);
+
+        const legendWidth = width;
+        const legendHeight = 10;
+
+        const legendScale = d3.scaleLinear()
+            .domain([-1, 1])
+            .range([0, legendWidth]);
+
+        const legendAxis = d3.axisBottom(legendScale)
+            .ticks(5)
+            .tickFormat(d3.format(".1f"));
+
+        legend.append("g")
+            .call(legendAxis);
+
+        const defs = svg.append("defs");
+
+        const linearGradient = defs.append("linearGradient")
+            .attr("id", "linear-gradient");
+
+        linearGradient.selectAll("stop")
+            .data(colorScale.ticks().map((t, i, n) => ({ offset: `${100*i/n.length}%`, color: colorScale(t) })))
+            .enter().append("stop")
+            .attr("offset", d => d.offset)
+            .attr("stop-color", d => d.color);
+
+        legend.append("rect")
+            .attr("width", legendWidth)
+            .attr("height", legendHeight)
+            .style("fill", "url(#linear-gradient)");
+    </script>
+</body>
+</html>
+
