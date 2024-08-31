@@ -314,42 +314,53 @@
             { variable1: 'Housing affordability', variable2: 'Cleaning services', correlation: 0.95 }
         ];
 
-        // Generate correlation table HTML
-        const correlationContainer = document.getElementById('correlation-table');
-        let tableHTML = `
-            <table>
-                <tr>
-                    <th>Variable 1</th>
-                    <th>Variable 2</th>
-                    <th>Correlation</th>
-                    <th>Strength</th>
-                </tr>
-        `;
-
-        correlationData.forEach(item => {
-            let strength;
-            if (Math.abs(item.correlation) >= 0.7) {
-                strength = 'Strong';
-            } else if (Math.abs(item.correlation) >= 0.5) {
-                strength = 'Moderate';
-            } else if (Math.abs(item.correlation) >= 0.3) {
-                strength = 'Weak';
-            } else {
-                strength = 'Very Weak';
-            }
-
-            tableHTML += `
-                <tr>
-                    <td>${item.variable1}</td>
-                    <td>${item.variable2}</td>
-                    <td>${item.correlation.toFixed(2)}</td>
-                    <td>${strength} ${item.correlation >= 0 ? 'Positive' : 'Negative'}</td>
-                </tr>
+        // Function to generate correlation table HTML
+        function generateCorrelationTable() {
+            let tableHTML = `
+                <table>
+                    <tr>
+                        <th>Variable 1</th>
+                        <th>Variable 2</th>
+                        <th>Correlation</th>
+                        <th>Strength</th>
+                    </tr>
             `;
-        });
 
-        tableHTML += '</table>';
-        correlationContainer.innerHTML = tableHTML;
+            correlationData.forEach(item => {
+                let strength;
+                if (Math.abs(item.correlation) >= 0.7) {
+                    strength = 'Strong';
+                } else if (Math.abs(item.correlation) >= 0.5) {
+                    strength = 'Moderate';
+                } else if (Math.abs(item.correlation) >= 0.3) {
+                    strength = 'Weak';
+                } else {
+                    strength = 'Very Weak';
+                }
+
+                tableHTML += `
+                    <tr>
+                        <td>${item.variable1}</td>
+                        <td>${item.variable2}</td>
+                        <td>${item.correlation.toFixed(2)}</td>
+                        <td>${strength} ${item.correlation >= 0 ? 'Positive' : 'Negative'}</td>
+                    </tr>
+                `;
+            });
+
+            tableHTML += '</table>';
+            return tableHTML;
+        }
+
+        // Wait for the DOM to be fully loaded before inserting the table
+        document.addEventListener('DOMContentLoaded', function() {
+            const correlationContainer = document.getElementById('correlation-table');
+            if (correlationContainer) {
+                correlationContainer.innerHTML = generateCorrelationTable();
+            } else {
+                console.error('Correlation table container not found');
+            }
+        });
     </script>
 
     <div class="container">
