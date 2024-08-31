@@ -296,13 +296,6 @@
             }
         });
 
-        // Function to generate color based on correlation value
-        function getCorrelationColor(value) {
-            const r = value < 0 ? 255 : Math.round(255 * (1 - value));
-            const b = value > 0 ? 255 : Math.round(255 * (1 + value));
-            return `rgb(${r}, 0, ${b})`;
-        }
-
         // Correlation data
         const correlationData = [
             { variable1: 'Short-term rental laws', variable2: 'Affordable housing', correlation: 0.71 },
@@ -321,47 +314,63 @@
             { variable1: 'Housing affordability', variable2: 'Cleaning services', correlation: 0.95 }
         ];
 
-        // Generate heatmap HTML
-        const heatmapContainer = document.getElementById('heatmap');
-        const variables1 = [...new Set(correlationData.map(d => d.variable1))];
-        const variables2 = [...new Set(correlationData.map(d => d.variable2))];
+        // Generate correlation table HTML
+        const correlationContainer = document.getElementById('correlation-table');
+        let tableHTML = `
+            <table>
+                <tr>
+                    <th>Variable 1</th>
+                    <th>Variable 2</th>
+                    <th>Correlation</th>
+                    <th>Strength</th>
+                </tr>
+        `;
 
-        let heatmapHTML = '<table class="heatmap"><tr><th></th>';
-        variables2.forEach(v2 => {
-            heatmapHTML += `<th>${v2}</th>`;
+        correlationData.forEach(item => {
+            let strength;
+            if (Math.abs(item.correlation) >= 0.7) {
+                strength = 'Strong';
+            } else if (Math.abs(item.correlation) >= 0.5) {
+                strength = 'Moderate';
+            } else if (Math.abs(item.correlation) >= 0.3) {
+                strength = 'Weak';
+            } else {
+                strength = 'Very Weak';
+            }
+
+            tableHTML += `
+                <tr>
+                    <td>${item.variable1}</td>
+                    <td>${item.variable2}</td>
+                    <td>${item.correlation.toFixed(2)}</td>
+                    <td>${strength} ${item.correlation >= 0 ? 'Positive' : 'Negative'}</td>
+                </tr>
+            `;
         });
-        heatmapHTML += '</tr>';
 
-        variables1.forEach(v1 => {
-            heatmapHTML += `<tr><th>${v1}</th>`;
-            variables2.forEach(v2 => {
-                const cell = correlationData.find(d => d.variable1 === v1 && d.variable2 === v2);
-                if (cell) {
-                    const color = getCorrelationColor(cell.correlation);
-                    heatmapHTML += `<td><div class="heatmap-cell" style="background-color: ${color};">${cell.correlation.toFixed(2)}</div></td>`;
-                } else {
-                    heatmapHTML += '<td></td>';
-                }
-            });
-            heatmapHTML += '</tr>';
-        });
-        heatmapHTML += '</table>';
-
-        heatmapContainer.innerHTML = heatmapHTML;
+        tableHTML += '</table>';
+        correlationContainer.innerHTML = tableHTML;
     </script>
 
     <div class="container">
         <h2>Correlation Analysis</h2>
-        <div id="heatmap"></div>
+        <div id="correlation-table"></div>
         <div class="explanation">
-            <p>This heatmap shows the correlations between various factors related to short-term rental regulations, housing affordability, and economic indicators. Key observations:</p>
+            <p>This table shows the correlations between various factors related to short-term rental regulations, housing affordability, and economic indicators. Key observations:</p>
             <ul>
-                <li>Strong positive correlations (dark blue) between short-term rental laws/Airbnb regulations and affordable housing, suggesting that regulations may contribute to improved housing affordability.</li>
-                <li>Positive correlations between regulations and income gap/poverty rate, which may indicate that regulations alone are not sufficient to address these issues.</li>
+                <li>Strong positive correlations between short-term rental laws/Airbnb regulations and affordable housing, suggesting that regulations may contribute to improved housing affordability.</li>
+                <li>Moderate to strong positive correlations between regulations and income gap/poverty rate, which may indicate that regulations alone are not sufficient to address these issues.</li>
                 <li>Strong positive correlations between regulations and cleaning services, possibly reflecting increased demand for professional cleaning in short-term rentals.</li>
-                <li>Weak negative correlations (light red) between regulations and hospitality jobs, suggesting a potential small negative impact on traditional hospitality employment.</li>
+                <li>Weak negative correlations between regulations and hospitality jobs, suggesting a potential small negative impact on traditional hospitality employment.</li>
             </ul>
             <p>Note: Correlation values range from -1 (perfect negative correlation) to 1 (perfect positive correlation). 0 indicates no correlation.</p>
+            <p>Strength guide:</p>
+            <ul>
+                <li>0.7 to 1.0 (or -0.7 to -1.0): Strong correlation</li>
+                <li>0.5 to 0.7 (or -0.5 to -0.7): Moderate correlation</li>
+                <li>0.3 to 0.5 (or -0.3 to -0.5): Weak correlation</li>
+                <li>0.0 to 0.3 (or 0.0 to -0.3): Very weak correlation</li>
+            </ul>
         </div>
     </div>
 </body>
