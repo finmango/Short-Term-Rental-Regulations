@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Short-term Rental Regulations Impact Analysis</title>
+    <title>Short-term Rental Regulations Impact Analysis (2010-2024)</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
@@ -50,45 +50,21 @@
         th {
             background-color: #f2f2f2;
         }
-        .heatmap {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 2px;
-        }
-        .heatmap th {
-            padding: 10px;
-            text-align: center;
-            font-weight: bold;
-        }
-        .heatmap td {
-            padding: 10px;
-            text-align: center;
-        }
-        .heatmap-cell {
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Short-term Rental Regulations Impact Analysis</h1>
-        <p>This application presents findings on the impact of short-term rental regulations on housing affordability, labor markets, and socioeconomic factors.</p>
+        <h1>Short-term Rental Regulations Impact Analysis (2010-2024)</h1>
+        <p>This application presents findings on the impact of short-term rental regulations on housing affordability, labor markets, and socioeconomic factors over a 15-year period.</p>
     </div>
 
     <div class="container">
         <h2>Understanding the Data</h2>
-        <p>The data used in this analysis represents various economic and regulatory indicators related to short-term rentals. Here's what you need to know:</p>
+        <p>The data used in this analysis represents various economic and regulatory indicators related to short-term rentals from 2010 to 2024. Here's what you need to know:</p>
         <ul>
             <li><strong>Values Representation:</strong> All values in the dataset are probabilities multiplied by 10 million. This scaling was done to make the numbers more manageable and easier to compare.</li>
             <li><strong>Interpretation:</strong> A value of 1,000,000 in the dataset represents a 10% probability or rate. For example, if the "Affordable housing" value is 1,317,475, it means there's approximately a 13.17% affordability rate.</li>
-            <li><strong>Time Range:</strong> The data covers the period from 2015 to 2024, allowing us to observe trends over time.</li>
+            <li><strong>Time Range:</strong> The data covers the period from 2010 to 2024, allowing us to observe long-term trends and the evolution of regulations' impact.</li>
         </ul>
         <p>Here's a sample of the data to illustrate:</p>
         <table>
@@ -97,6 +73,12 @@
                 <th>Affordable Housing</th>
                 <th>Short-term Rental Laws</th>
                 <th>Airbnb Regulations</th>
+            </tr>
+            <tr>
+                <td>2010</td>
+                <td>11.54% (1,153,992)</td>
+                <td>0% (0)</td>
+                <td>0% (0)</td>
             </tr>
             <tr>
                 <td>2015</td>
@@ -125,11 +107,11 @@
             <canvas id="housingChart"></canvas>
         </div>
         <div class="explanation">
-            <p>This chart shows the trends in affordable housing, short-term rental laws, and Airbnb regulations from 2015 to 2024. Key observations:</p>
+            <p>This chart shows the trends in affordable housing, short-term rental laws, and Airbnb regulations from 2010 to 2024. Key observations:</p>
             <ul>
-                <li>Affordable housing values have generally increased over time, with a notable dip in 2021.</li>
-                <li>Short-term rental laws and Airbnb regulations began to be implemented around 2020.</li>
-                <li>There appears to be a correlation between the introduction of regulations and the increase in affordable housing values, particularly from 2021 onwards.</li>
+                <li>Affordable housing values have generally increased over the 15-year period, with some fluctuations.</li>
+                <li>Short-term rental laws and Airbnb regulations began to be implemented around 2015, with significant increases after 2020.</li>
+                <li>There appears to be a correlation between the introduction and strengthening of regulations and the increase in affordable housing values, particularly in recent years.</li>
             </ul>
         </div>
     </div>
@@ -140,18 +122,23 @@
             <canvas id="laborChart"></canvas>
         </div>
         <div class="explanation">
-            <p>This chart illustrates the trends in hospitality jobs, cleaning services, and short-term rental regulations from 2015 to 2024. Key observations:</p>
+            <p>This chart illustrates the trends in hospitality jobs, cleaning services, and short-term rental regulations from 2010 to 2024. Key observations:</p>
             <ul>
-                <li>Cleaning services have shown a steady increase over time.</li>
-                <li>Hospitality jobs experienced a spike in 2020, followed by a sharp decline in 2021, possibly due to the COVID-19 pandemic.</li>
-                <li>The implementation of short-term rental laws and Airbnb regulations appears to coincide with changes in both hospitality jobs and cleaning services.</li>
+                <li>Cleaning services have shown a steady increase over the 15-year period.</li>
+                <li>Hospitality jobs have fluctuated, with a notable spike in 2020 followed by a sharp decline, possibly due to the COVID-19 pandemic.</li>
+                <li>The implementation of short-term rental laws and Airbnb regulations appears to coincide with changes in both hospitality jobs and cleaning services, particularly after 2015.</li>
             </ul>
         </div>
     </div>
 
     <script>
-        // Data for charts
+        // Extended data for charts (2010-2024)
         const data = [
+            {year: 2010, affordableHousing: 115.399164275319, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 51.46087561993374, cleaningServices: 157.81408778299829},
+            {year: 2011, affordableHousing: 109.56786122028467, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 50.39023879751689, cleaningServices: 176.43337599897498},
+            {year: 2012, affordableHousing: 113.74700737179207, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 42.944644376650054, cleaningServices: 186.65452188695397},
+            {year: 2013, affordableHousing: 110.48467323824269, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 40.342625000893975, cleaningServices: 189.8054550695624},
+            {year: 2014, affordableHousing: 129.65277589570394, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 44.79594341418581, cleaningServices: 190.86349636498315},
             {year: 2015, affordableHousing: 131.7475438853553, shortTermRentalLaws: 0, airbnbRegulations: 0.4987942116854808, hospitalityJobs: 41.5246197654157, cleaningServices: 185.65361630122044},
             {year: 2016, affordableHousing: 140.5995449162007, shortTermRentalLaws: 0, airbnbRegulations: 0.4988760072311675, hospitalityJobs: 40.10859033181687, cleaningServices: 213.54150575518375},
             {year: 2017, affordableHousing: 155.35963566937943, shortTermRentalLaws: 0, airbnbRegulations: 1.237074587917812, hospitalityJobs: 36.832256044465055, cleaningServices: 251.68124102202603},
@@ -296,22 +283,30 @@
             }
         });
 
-        // Correlation data
+        // Function to calculate correlation
+        function correlation(x, y) {
+            const n = x.length;
+            let sum_x = 0, sum_y = 0, sum_xy = 0, sum_x2 = 0, sum_y2 = 0;
+            for (let i = 0; i < n; i++) {
+                sum_x += x[i];
+                sum_y += y[i];
+                sum_xy += x[i] * y[i];
+                sum_x2 += x[i] * x[i];
+                sum_y2 += y[i] * y[i];
+            }
+            return (n * sum_xy - sum_x * sum_y) / Math.sqrt((n * sum_x2 - sum_x * sum_x) * (n * sum_y2 - sum_y * sum_y));
+        }
+
+        // Calculate correlations
         const correlationData = [
-            { variable1: 'Short-term rental laws', variable2: 'Affordable housing', correlation: 0.71 },
-            { variable1: 'Short-term rental laws', variable2: 'Income gap', correlation: 0.63 },
-            { variable1: 'Short-term rental laws', variable2: 'Poverty rate', correlation: 0.58 },
-            { variable1: 'Short-term rental laws', variable2: 'Hospitality jobs', correlation: -0.12 },
-            { variable1: 'Short-term rental laws', variable2: 'Cleaning services', correlation: 0.82 },
-            { variable1: 'Airbnb regulations', variable2: 'Affordable housing', correlation: 0.86 },
-            { variable1: 'Airbnb regulations', variable2: 'Income gap', correlation: 0.79 },
-            { variable1: 'Airbnb regulations', variable2: 'Poverty rate', correlation: 0.72 },
-            { variable1: 'Airbnb regulations', variable2: 'Hospitality jobs', correlation: -0.05 },
-            { variable1: 'Airbnb regulations', variable2: 'Cleaning services', correlation: 0.91 },
-            { variable1: 'Housing affordability', variable2: 'Income gap', correlation: 0.88 },
-            { variable1: 'Housing affordability', variable2: 'Poverty rate', correlation: 0.83 },
-            { variable1: 'Housing affordability', variable2: 'Hospitality jobs', correlation: 0.11 },
-            { variable1: 'Housing affordability', variable2: 'Cleaning services', correlation: 0.95 }
+            { variable1: 'Short-term rental laws', variable2: 'Affordable housing', correlation: correlation(data.map(d => d.shortTermRentalLaws), data.map(d => d.affordableHousing)) },
+            { variable1: 'Short-term rental laws', variable2: 'Hospitality jobs', correlation: correlation(data.map(d => d.shortTermRentalLaws), data.map(d => d.hospitalityJobs)) },
+            { variable1: 'Short-term rental laws', variable2: 'Cleaning services', correlation: correlation(data.map(d => d.shortTermRentalLaws), data.map(d => d.cleaningServices)) },
+            { variable1: 'Airbnb regulations', variable2: 'Affordable housing', correlation: correlation(data.map(d => d.airbnbRegulations), data.map(d => d.affordableHousing)) },
+            { variable1: 'Airbnb regulations', variable2: 'Hospitality jobs', correlation: correlation(data.map(d => d.airbnbRegulations), data.map(d => d.hospitalityJobs)) },
+            { variable1: 'Airbnb regulations', variable2: 'Cleaning services', correlation: correlation(data.map(d => d.airbnbRegulations), data.map(d => d.cleaningServices)) },
+            { variable1: 'Affordable housing', variable2: 'Hospitality jobs', correlation: correlation(data.map(d => d.affordableHousing), data.map(d => d.hospitalityJobs)) },
+            { variable1: 'Affordable housing', variable2: 'Cleaning services', correlation: correlation(data.map(d => d.affordableHousing), data.map(d => d.cleaningServices)) }
         ];
 
         // Function to generate correlation table HTML
@@ -364,15 +359,15 @@
     </script>
 
     <div class="container">
-        <h2>Correlation Analysis</h2>
+        <h2>Correlation Analysis (2010-2024)</h2>
         <div id="correlation-table"></div>
         <div class="explanation">
-            <p>This table shows the correlations between various factors related to short-term rental regulations, housing affordability, and economic indicators. Key observations:</p>
+            <p>This table shows the correlations between various factors related to short-term rental regulations, housing affordability, and labor market indicators over the 15-year period from 2010 to 2024. Key observations:</p>
             <ul>
-                <li>Strong positive correlations between short-term rental laws/Airbnb regulations and affordable housing, suggesting that regulations may contribute to improved housing affordability.</li>
-                <li>Moderate to strong positive correlations between regulations and income gap/poverty rate, which may indicate that regulations alone are not sufficient to address these issues.</li>
-                <li>Strong positive correlations between regulations and cleaning services, possibly reflecting increased demand for professional cleaning in short-term rentals.</li>
-                <li>Weak negative correlations between regulations and hospitality jobs, suggesting a potential small negative impact on traditional hospitality employment.</li>
+                <li>The correlation between short-term rental laws/Airbnb regulations and affordable housing indicates the potential impact of these regulations on housing affordability over time.</li>
+                <li>The relationship between regulations and hospitality jobs shows how the implementation of these laws may have affected traditional hospitality employment in the long term.</li>
+                <li>The correlation between regulations and cleaning services reflects the potential growth in demand for professional cleaning in short-term rentals over the 15-year period.</li>
+                <li>The relationship between affordable housing and labor market indicators (hospitality jobs and cleaning services) provides insight into how changes in the housing market may have influenced job trends in these sectors.</li>
             </ul>
             <p>Note: Correlation values range from -1 (perfect negative correlation) to 1 (perfect positive correlation). 0 indicates no correlation.</p>
             <p>Strength guide:</p>
@@ -382,6 +377,7 @@
                 <li>0.3 to 0.5 (or -0.3 to -0.5): Weak correlation</li>
                 <li>0.0 to 0.3 (or 0.0 to -0.3): Very weak correlation</li>
             </ul>
+            <p>Remember that correlation does not imply causation. These relationships should be interpreted with caution and in conjunction with other economic and policy factors.</p>
         </div>
     </div>
 </body>
