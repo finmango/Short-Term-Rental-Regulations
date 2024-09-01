@@ -28,8 +28,16 @@
         }
         .chart-container {
             position: relative;
-            height: 400px;
+            height: 0;
             width: 100%;
+            padding-bottom: 75%; /* Aspect ratio 4:3 */
+        }
+        .chart-container canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100% !important;
+            height: 100% !important;
         }
         .explanation {
             background-color: #e3f2fd;
@@ -50,14 +58,27 @@
         th {
             background-color: #f2f2f2;
         }
+        .logo {
+            max-width: 200px;
+            margin: 0 auto 20px;
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            .chart-container {
+                padding-bottom: 100%; /* Increase aspect ratio for mobile */
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <img src="https://finmango.org/wp-content/uploads/2022/05/finmango-logo.png" alt="FinMango Logo" class="logo">
         <h1>Short-term Rental Regulations Impact Analysis (2010-2024)</h1>
         <p>This internal presentation was prepared by <a href="https://sglasgow.com" target="_blank">Scott Glasgow</a> from <a href="https://finmango.org" target="_blank">FinMango</a> for <a href="https://www.ivybusiness.iastate.edu/directory/czhang1/" target="_blank">Chen Zhang, PhD</a> from Iowa State University to help analyze Google search trends related to short-term rental regulations, housing affordability, and labor markets over a 15-year period.</p>
     </div>
-
     <div class="container">
         <h2>Understanding the Data</h2>
         <p>The data used in this analysis represents Google search query volumes for various terms related to short-term rentals from 2010 to 2024. Here's what you need to know:</p>
@@ -68,7 +89,6 @@
             <li><strong>Time Range:</strong> The data covers the period from 2010 to 2024, allowing us to observe long-term trends in public interest regarding these topics.</li>
         </ul>
     </div>
-
     <div class="container">
         <h2>Search Interest: Housing Affordability and Regulations</h2>
         <div class="chart-container">
@@ -84,7 +104,6 @@
             </ul>
         </div>
     </div>
-
     <div class="container">
         <h2>Search Interest: Labor Market and Regulations</h2>
         <div class="chart-container">
@@ -101,232 +120,231 @@
         </div>
     </div>
 <script>
-    // Extended data for charts (2010-2024)
-    const data = [
-        {year: 2010, affordableHousing: 115.399164275319, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 51.46087561993374, cleaningServices: 157.81408778299829},
-        {year: 2011, affordableHousing: 109.56786122028467, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 50.39023879751689, cleaningServices: 176.43337599897498},
-        {year: 2012, affordableHousing: 113.74700737179207, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 42.944644376650054, cleaningServices: 186.65452188695397},
-        {year: 2013, affordableHousing: 110.48467323824269, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 40.342625000893975, cleaningServices: 189.8054550695624},
-        {year: 2014, affordableHousing: 129.65277589570394, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 44.79594341418581, cleaningServices: 190.86349636498315},
-        {year: 2015, affordableHousing: 131.7475438853553, shortTermRentalLaws: 0, airbnbRegulations: 0.4987942116854808, hospitalityJobs: 41.5246197654157, cleaningServices: 185.65361630122044},
-        {year: 2016, affordableHousing: 140.5995449162007, shortTermRentalLaws: 0, airbnbRegulations: 0.4988760072311675, hospitalityJobs: 40.10859033181687, cleaningServices: 213.54150575518375},
-        {year: 2017, affordableHousing: 155.35963566937943, shortTermRentalLaws: 0, airbnbRegulations: 1.237074587917812, hospitalityJobs: 36.832256044465055, cleaningServices: 251.68124102202603},
-        {year: 2018, affordableHousing: 159.06869983111304, shortTermRentalLaws: 0, airbnbRegulations: 1.640574275192699, hospitalityJobs: 37.49061266615435, cleaningServices: 247.8389420957562},
-        {year: 2019, affordableHousing: 169.26667714891343, shortTermRentalLaws: 0, airbnbRegulations: 2.762517925069709, hospitalityJobs: 38.286828601686594, cleaningServices: 249.31334054134945},
-        {year: 2020, affordableHousing: 173.07956777999712, shortTermRentalLaws: 0.2989023199772414, airbnbRegulations: 2.7374573367521973, hospitalityJobs: 54.72271728034296, cleaningServices: 291.29901576954666},
-        {year: 2021, affordableHousing: 131.4838125842884, shortTermRentalLaws: 0.35790945103214, airbnbRegulations: 1.924517416426108, hospitalityJobs: 30.40617577230923, cleaningServices: 340.08353409431925},
-        {year: 2022, affordableHousing: 217.16287834738827, shortTermRentalLaws: 0.766430105420579, airbnbRegulations: 3.7444808891378774, hospitalityJobs: 32.61457681066526, cleaningServices: 347.71182772936726},
-        {year: 2023, affordableHousing: 236.5670413498023, shortTermRentalLaws: 0.6673860168824454, airbnbRegulations: 4.1337422690960235, hospitalityJobs: 37.555688573045295, cleaningServices: 367.6084868377735},
-        {year: 2024, affordableHousing: 250.39919617528028, shortTermRentalLaws: 0.41566925946748595, airbnbRegulations: 3.2899786088328287, hospitalityJobs: 42.36997597354586, cleaningServices: 355.9382226907395}
-    ];
+// Extended data for charts (2010-2024)
+const data = [
+    {year: 2010, affordableHousing: 115.399164275319, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 51.46087561993374, cleaningServices: 157.81408778299829},
+    {year: 2011, affordableHousing: 109.56786122028467, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 50.39023879751689, cleaningServices: 176.43337599897498},
+    {year: 2012, affordableHousing: 113.74700737179207, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 42.944644376650054, cleaningServices: 186.65452188695397},
+    {year: 2013, affordableHousing: 110.48467323824269, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 40.342625000893975, cleaningServices: 189.8054550695624},
+    {year: 2014, affordableHousing: 129.65277589570394, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 44.79594341418581, cleaningServices: 190.86349636498315},
+    {year: 2015, affordableHousing: 131.7475438853553, shortTermRentalLaws: 0, airbnbRegulations: 0.4987942116854808, hospitalityJobs: 41.5246197654157, cleaningServices: 185.65361630122044},
+    {year: 2016, affordableHousing: 140.5995449162007, shortTermRentalLaws: 0, airbnbRegulations: 0.4988760072311675, hospitalityJobs: 40.10859033181687, cleaningServices: 213.54150575518375},
+    {year: 2017, affordableHousing: 155.35963566937943, shortTermRentalLaws: 0, airbnbRegulations: 1.237074587917812, hospitalityJobs: 36.832256044465055, cleaningServices: 251.68124102202603},
+    {year: 2018, affordableHousing: 159.06869983111304, shortTermRentalLaws: 0, airbnbRegulations: 1.640574275192699, hospitalityJobs: 37.49061266615435, cleaningServices: 247.8389420957562},
+    {year: 2019, affordableHousing: 169.26667714891343, shortTermRentalLaws: 0, airbnbRegulations: 2.762517925069709, hospitalityJobs: 38.286828601686594, cleaningServices: 249.31334054134945},
+    {year: 2020, affordableHousing: 173.07956777999712, shortTermRentalLaws: 0.2989023199772414, airbnbRegulations: 2.7374573367521973, hospitalityJobs: 54.72271728034296, cleaningServices: 291.29901576954666},
+    {year: 2021, affordableHousing: 131.4838125842884, shortTermRentalLaws: 0.35790945103214, airbnbRegulations: 1.924517416426108, hospitalityJobs: 30.40617577230923, cleaningServices: 340.08353409431925},
+    {year: 2022, affordableHousing: 217.16287834738827, shortTermRentalLaws: 0.766430105420579, airbnbRegulations: 3.7444808891378774, hospitalityJobs: 32.61457681066526, cleaningServices: 347.71182772936726},
+    {year: 2023, affordableHousing: 236.5670413498023, shortTermRentalLaws: 0.6673860168824454, airbnbRegulations: 4.1337422690960235, hospitalityJobs: 37.555688573045295, cleaningServices: 367.6084868377735},
+    {year: 2024, affordableHousing: 250.39919617528028, shortTermRentalLaws: 0.41566925946748595, airbnbRegulations: 3.2899786088328287, hospitalityJobs: 42.36997597354586, cleaningServices: 355.9382226907395}
+];
 
-    // Housing Affordability and Regulation Search Interest Chart
-    const housingCtx = document.getElementById('housingChart').getContext('2d');
-    new Chart(housingCtx, {
-        type: 'line',
-        data: {
-            labels: data.map(d => d.year),
-            datasets: [
-                {
-                    label: 'Affordable Housing',
-                    data: data.map(d => d.affordableHousing),
-                    borderColor: 'rgb(75, 192, 192)',
-                    yAxisID: 'y',
-                    tension: 0.1
-                },
-                {
-                    label: 'Short-term Rental Laws',
-                    data: data.map(d => d.shortTermRentalLaws),
-                    borderColor: 'rgb(255, 99, 132)',
-                    yAxisID: 'y1',
-                    tension: 0.1
-                },
-                {
-                    label: 'Airbnb Regulations',
-                    data: data.map(d => d.airbnbRegulations),
-                    borderColor: 'rgb(54, 162, 235)',
-                    yAxisID: 'y1',
-                    tension: 0.1
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            interaction: {
-                mode: 'index',
-                intersect: false,
+// Housing Affordability and Regulation Search Interest Chart
+const housingCtx = document.getElementById('housingChart').getContext('2d');
+new Chart(housingCtx, {
+    type: 'line',
+    data: {
+        labels: data.map(d => d.year),
+        datasets: [
+            {
+                label: 'Affordable Housing',
+                data: data.map(d => d.affordableHousing),
+                borderColor: 'rgb(75, 192, 192)',
+                yAxisID: 'y',
+                tension: 0.1
             },
-            stacked: false,
-            scales: {
-                y: {
-                    type: 'linear',
+            {
+                label: 'Short-term Rental Laws',
+                data: data.map(d => d.shortTermRentalLaws),
+                borderColor: 'rgb(255, 99, 132)',
+                yAxisID: 'y1',
+                tension: 0.1
+            },
+            {
+                label: 'Airbnb Regulations',
+                data: data.map(d => d.airbnbRegulations),
+                borderColor: 'rgb(54, 162, 235)',
+                yAxisID: 'y1',
+                tension: 0.1
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+            mode: 'index',
+            intersect: false,
+        },
+        stacked: false,
+        scales: {
+            y: {
+                type: 'linear',
+                display: true,
+                position: 'left',
+                title: {
                     display: true,
-                    position: 'left',
-                    title: {
-                        display: true,
-                        text: 'Affordable Housing'
-                    }
-                },
-                y1: {
-                    type: 'linear',
-                    display: true,
-                    position: 'right',
-                    title: {
-                        display: true,
-                        text: 'Regulations'
-                    },
-                    grid: {
-                        drawOnChartArea: false,
-                    },
+                    text: 'Affordable Housing'
                 }
+            },
+            y1: {
+                type: 'linear',
+                display: true,
+                position: 'right',
+                title: {
+                    display: true,
+                    text: 'Regulations'
+                },
+                grid: {
+                    drawOnChartArea: false,
+                },
             }
         }
-    });
-
-    // Labor Market and Regulation Search Interest Chart
-    const laborCtx = document.getElementById('laborChart').getContext('2d');
-    new Chart(laborCtx, {
-        type: 'line',
-        data: {
-            labels: data.map(d => d.year),
-            datasets: [
-                {
-                    label: 'Hospitality Jobs',
-                    data: data.map(d => d.hospitalityJobs),
-                    borderColor: 'rgb(255, 159, 64)',
-                    yAxisID: 'y',
-                    tension: 0.1
-                },
-                {
-                    label: 'Cleaning Services',
-                    data: data.map(d => d.cleaningServices),
-                    borderColor: 'rgb(153, 102, 255)',
-                    yAxisID: 'y',
-                    tension: 0.1
-                },
-                {
-                    label: 'Short-term Rental Laws',
-                    data: data.map(d => d.shortTermRentalLaws),
-                    borderColor: 'rgb(255, 99, 132)',
-                    yAxisID: 'y1',
-                    tension: 0.1
-                },
-                {
-                    label: 'Airbnb Regulations',
-                    data: data.map(d => d.airbnbRegulations),
-                    borderColor: 'rgb(54, 162, 235)',
-                    yAxisID: 'y1',
-                    tension: 0.1
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            interaction: {
-                mode: 'index',
-                intersect: false,
+    }
+});
+// Labor Market and Regulation Search Interest Chart
+const laborCtx = document.getElementById('laborChart').getContext('2d');
+new Chart(laborCtx, {
+    type: 'line',
+    data: {
+        labels: data.map(d => d.year),
+        datasets: [
+            {
+                label: 'Hospitality Jobs',
+                data: data.map(d => d.hospitalityJobs),
+                borderColor: 'rgb(255, 159, 64)',
+                yAxisID: 'y',
+                tension: 0.1
             },
-            stacked: false,
-            scales: {
-                y: {
-                    type: 'linear',
+            {
+                label: 'Cleaning Services',
+                data: data.map(d => d.cleaningServices),
+                borderColor: 'rgb(153, 102, 255)',
+                yAxisID: 'y',
+                tension: 0.1
+            },
+            {
+                label: 'Short-term Rental Laws',
+                data: data.map(d => d.shortTermRentalLaws),
+                borderColor: 'rgb(255, 99, 132)',
+                yAxisID: 'y1',
+                tension: 0.1
+            },
+            {
+                label: 'Airbnb Regulations',
+                data: data.map(d => d.airbnbRegulations),
+                borderColor: 'rgb(54, 162, 235)',
+                yAxisID: 'y1',
+                tension: 0.1
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+            mode: 'index',
+            intersect: false,
+        },
+        stacked: false,
+        scales: {
+            y: {
+                type: 'linear',
+                display: true,
+                position: 'left',
+                title: {
                     display: true,
-                    position: 'left',
-                    title: {
-                        display: true,
-                        text: 'Jobs and Services'
-                    }
-                },
-                y1: {
-                    type: 'linear',
-                    display: true,
-                    position: 'right',
-                    title: {
-                        display: true,
-                        text: 'Regulations'
-                    },
-                    grid: {
-                        drawOnChartArea: false,
-                    },
+                    text: 'Jobs and Services'
                 }
+            },
+            y1: {
+                type: 'linear',
+                display: true,
+                position: 'right',
+                title: {
+                    display: true,
+                    text: 'Regulations'
+                },
+                grid: {
+                    drawOnChartArea: false,
+                },
             }
         }
-    });
+    }
+});
+
 // Function to calculate correlation
-    function correlation(x, y) {
-        const n = x.length;
-        let sum_x = 0, sum_y = 0, sum_xy = 0, sum_x2 = 0, sum_y2 = 0;
-        for (let i = 0; i < n; i++) {
-            sum_x += x[i];
-            sum_y += y[i];
-            sum_xy += x[i] * y[i];
-            sum_x2 += x[i] * x[i];
-            sum_y2 += y[i] * y[i];
-        }
-        const numerator = n * sum_xy - sum_x * sum_y;
-        const denominator = Math.sqrt((n * sum_x2 - sum_x * sum_x) * (n * sum_y2 - sum_y * sum_y));
-        return denominator === 0 ? 0 : numerator / denominator;
+function correlation(x, y) {
+    const n = x.length;
+    let sum_x = 0, sum_y = 0, sum_xy = 0, sum_x2 = 0, sum_y2 = 0;
+    for (let i = 0; i < n; i++) {
+        sum_x += x[i];
+        sum_y += y[i];
+        sum_xy += x[i] * y[i];
+        sum_x2 += x[i] * x[i];
+        sum_y2 += y[i] * y[i];
     }
+    const numerator = n * sum_xy - sum_x * sum_y;
+    const denominator = Math.sqrt((n * sum_x2 - sum_x * sum_x) * (n * sum_y2 - sum_y * sum_y));
+    return denominator === 0 ? 0 : numerator / denominator;
+}
 
-    // Calculate correlations
-    const correlationData = [
-        { variable1: 'Short-term rental laws', variable2: 'Affordable housing', correlation: correlation(data.map(d => d.shortTermRentalLaws), data.map(d => d.affordableHousing)) },
-        { variable1: 'Short-term rental laws', variable2: 'Hospitality jobs', correlation: correlation(data.map(d => d.shortTermRentalLaws), data.map(d => d.hospitalityJobs)) },
-        { variable1: 'Short-term rental laws', variable2: 'Cleaning services', correlation: correlation(data.map(d => d.shortTermRentalLaws), data.map(d => d.cleaningServices)) },
-        { variable1: 'Airbnb regulations', variable2: 'Affordable housing', correlation: correlation(data.map(d => d.airbnbRegulations), data.map(d => d.affordableHousing)) },
-        { variable1: 'Airbnb regulations', variable2: 'Hospitality jobs', correlation: correlation(data.map(d => d.airbnbRegulations), data.map(d => d.hospitalityJobs)) },
-        { variable1: 'Airbnb regulations', variable2: 'Cleaning services', correlation: correlation(data.map(d => d.airbnbRegulations), data.map(d => d.cleaningServices)) },
-        { variable1: 'Affordable housing', variable2: 'Hospitality jobs', correlation: correlation(data.map(d => d.affordableHousing), data.map(d => d.hospitalityJobs)) },
-        { variable1: 'Affordable housing', variable2: 'Cleaning services', correlation: correlation(data.map(d => d.affordableHousing), data.map(d => d.cleaningServices)) }
-    ];
+// Calculate correlations
+const correlationData = [
+    { variable1: 'Short-term rental laws', variable2: 'Affordable housing', correlation: correlation(data.map(d => d.shortTermRentalLaws), data.map(d => d.affordableHousing)) },
+    { variable1: 'Short-term rental laws', variable2: 'Hospitality jobs', correlation: correlation(data.map(d => d.shortTermRentalLaws), data.map(d => d.hospitalityJobs)) },
+    { variable1: 'Short-term rental laws', variable2: 'Cleaning services', correlation: correlation(data.map(d => d.shortTermRentalLaws), data.map(d => d.cleaningServices)) },
+    { variable1: 'Airbnb regulations', variable2: 'Affordable housing', correlation: correlation(data.map(d => d.airbnbRegulations), data.map(d => d.affordableHousing)) },
+    { variable1: 'Airbnb regulations', variable2: 'Hospitality jobs', correlation: correlation(data.map(d => d.airbnbRegulations), data.map(d => d.hospitalityJobs)) },
+    { variable1: 'Airbnb regulations', variable2: 'Cleaning services', correlation: correlation(data.map(d => d.airbnbRegulations), data.map(d => d.cleaningServices)) },
+    { variable1: 'Affordable housing', variable2: 'Hospitality jobs', correlation: correlation(data.map(d => d.affordableHousing), data.map(d => d.hospitalityJobs)) },
+    { variable1: 'Affordable housing', variable2: 'Cleaning services', correlation: correlation(data.map(d => d.affordableHousing), data.map(d => d.cleaningServices)) }
+];
 
-    // Function to generate correlation table HTML
-    function generateCorrelationTable() {
-        let tableHTML = `
-            <table>
-                <tr>
-                    <th>Variable 1</th>
-                    <th>Variable 2</th>
-                    <th>Correlation</th>
-                    <th>Strength</th>
-                </tr>
-        `;
-
-        correlationData.forEach(item => {
-            let strength;
-            if (Math.abs(item.correlation) >= 0.7) {
-                strength = 'Strong';
-            } else if (Math.abs(item.correlation) >= 0.5) {
-                strength = 'Moderate';
-            } else if (Math.abs(item.correlation) >= 0.3) {
-                strength = 'Weak';
-            } else {
-                strength = 'Very Weak';
-            }
-
-            tableHTML += `
-                <tr>
-                    <td>${item.variable1}</td>
-                    <td>${item.variable2}</td>
-                    <td>${item.correlation.toFixed(2)}</td>
-                    <td>${strength} ${item.correlation >= 0 ? 'Positive' : 'Negative'}</td>
-                </tr>
-            `;
-        });
-
-        tableHTML += '</table>';
-        return tableHTML;
-    }
-
-    // Wait for the DOM to be fully loaded before inserting the table
-    document.addEventListener('DOMContentLoaded', function() {
-        const correlationContainer = document.getElementById('correlation-table');
-        if (correlationContainer) {
-            correlationContainer.innerHTML = generateCorrelationTable();
+// Function to generate correlation table HTML
+function generateCorrelationTable() {
+    let tableHTML = `
+    <table>
+        <tr>
+            <th>Variable 1</th>
+            <th>Variable 2</th>
+            <th>Correlation</th>
+            <th>Strength</th>
+        </tr>
+    `;
+    correlationData.forEach(item => {
+        let strength;
+        if (Math.abs(item.correlation) >= 0.7) {
+            strength = 'Strong';
+        } else if (Math.abs(item.correlation) >= 0.5) {
+            strength = 'Moderate';
+        } else if (Math.abs(item.correlation) >= 0.3) {
+            strength = 'Weak';
         } else {
-            console.error('Correlation table container not found');
+            strength = 'Very Weak';
         }
+        tableHTML += `
+        <tr>
+            <td>${item.variable1}</td>
+            <td>${item.variable2}</td>
+            <td>${item.correlation.toFixed(2)}</td>
+            <td>${strength} ${item.correlation >= 0 ? 'Positive' : 'Negative'}</td>
+        </tr>
+        `;
     });
+    tableHTML += '</table>';
+    return tableHTML;
+}
+
+// Wait for the DOM to be fully loaded before inserting the table
+document.addEventListener('DOMContentLoaded', function() {
+    const correlationContainer = document.getElementById('correlation-table');
+    if (correlationContainer) {
+        correlationContainer.innerHTML = generateCorrelationTable();
+    } else {
+        console.error('Correlation table container not found');
+    }
+});
 </script>
 
 <div class="container">
