@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Short-term Rental Regulations Impact Analysis (2010-2024)</title>
+    <title>U.S. Short-term Rental Regulations Impact Analysis (2010-2024)</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
@@ -76,46 +76,56 @@
 <body>
     <div class="container">
         <img src="finmango.png" alt="FinMango Logo" class="logo">
-        <h1>Short-term Rental Regulations Impact Analysis (2010-2024)</h1>
-        <p>This analysis, prepared by <a href="https://sglasgow.com" target="_blank">Scott Glasgow</a> (<a href="https://finmango.org" target="_blank">FinMango</a>) for <a href="https://www.ivybusiness.iastate.edu/directory/czhang1/" target="_blank">Chen Zhang, PhD</a> (Iowa State University), analyzes Google search trends related to short-term rental regulations, housing affordability, and labor markets over a 15-year period.</p>
+        <h1>U.S. Short-term Rental Regulations Impact Analysis (2010-2024)</h1>
+        <p>This analysis, prepared by <a href="https://sglasgow.com" target="_blank">Scott Glasgow</a> (<a href="https://finmango.org" target="_blank">FinMango</a>) for <a href="https://www.ivybusiness.iastate.edu/directory/czhang1/" target="_blank">Chen Zhang, PhD</a> (Iowa State University), examines Google search trends in the United States related to short-term rental regulations, housing affordability, and labor markets over a 15-year period.</p>
     </div>
     <div class="container">
         <h2>Understanding the Data</h2>
-        <p>The data used in this analysis represents Google search query volumes for various terms related to short-term rentals from 2010 to 2024. Here's what you need to know:</p>
+        <p>The data used in this analysis represents Google search query volumes for various terms related to short-term rentals in the United States from 2010 to 2024. Here's what you need to know:</p>
         <ul>
             <li><strong>Data Source:</strong> Google Trends API.</li>
             <li><strong>Data Format:</strong> The values represent the probability of a search term multiplied by 10 million.</li>
-            <li><strong>Interpretation:</strong> Higher values indicate greater search interest for a particular term relative to other terms in the dataset.</li>
+            <li><strong>Interpretation:</strong> Higher values indicate greater search interest for a particular term relative to all terms searched in the U.S. during that time period.</li>
             <li><strong>Time Range:</strong> The data covers the period from 2010 to 2024, allowing us to observe long-term trends in public interest regarding these topics.</li>
         </ul>
     </div>
     <div class="container">
-        <h2>Search Interest: Housing Affordability and Regulations</h2>
+        <h2>Search Interest: Housing Affordability</h2>
         <div class="chart-container">
             <canvas id="housingChart"></canvas>
         </div>
         <div class="explanation">
-            <p>This chart shows the trends in search interest for affordable housing, short-term rental laws, and Airbnb regulations from 2010 to 2024. Key observations:</p>
+            <p>This chart shows the trends in search interest for affordable housing from 2010 to 2024. Key observations:</p>
             <ul>
                 <li>Search interest in affordable housing has generally increased over the 15-year period, indicating growing public concern or awareness.</li>
-                <li>Interest in short-term rental laws and Airbnb regulations began to appear in searches around 2015, with significant increases after 2020.</li>
-                <li>The rise in searches for regulatory terms may reflect increasing public awareness of policy changes or debates surrounding short-term rentals.</li>
-                <li>Note the different scales: Affordable housing searches are much more frequent than regulation-related searches.</li>
+                <li>Note that this trend may be influenced by overall increases in housing costs and other economic factors beyond short-term rental regulations.</li>
             </ul>
         </div>
     </div>
     <div class="container">
-        <h2>Search Interest: Labor Market and Regulations</h2>
+        <h2>Search Interest: Short-term Rental Regulations</h2>
+        <div class="chart-container">
+            <canvas id="regulationChart"></canvas>
+        </div>
+        <div class="explanation">
+            <p>This chart illustrates the trends in search interest for short-term rental laws and Airbnb regulations from 2010 to 2024. Key observations:</p>
+            <ul>
+                <li>Interest in short-term rental laws and Airbnb regulations began to appear in searches around 2015, with significant increases after 2020.</li>
+                <li>The rise in searches for regulatory terms may reflect increasing public awareness of policy changes or debates surrounding short-term rentals.</li>
+            </ul>
+        </div>
+    </div>
+<div class="container">
+        <h2>Search Interest: Labor Market</h2>
         <div class="chart-container">
             <canvas id="laborChart"></canvas>
         </div>
         <div class="explanation">
-            <p>This chart illustrates the trends in search interest for hospitality jobs, cleaning services, and short-term rental regulations from 2010 to 2024. Key observations:</p>
+            <p>This chart illustrates the trends in search interest for hospitality jobs and cleaning services from 2010 to 2024. Key observations:</p>
             <ul>
                 <li>Search interest in cleaning services has shown a general increase over the 15-year period, potentially indicating growing demand or awareness of these services.</li>
                 <li>Interest in hospitality jobs has fluctuated, with a notable spike in 2020 followed by a sharp decline, possibly reflecting job market changes during the COVID-19 pandemic.</li>
-                <li>The emergence of searches for short-term rental laws and Airbnb regulations coincides with changes in search patterns for hospitality jobs and cleaning services, particularly after 2015.</li>
-                <li>Again, note the different scales: Cleaning services and hospitality jobs have much higher search volumes than the regulation-related terms.</li>
+                <li>These trends may be influenced by factors beyond short-term rental regulations, such as overall economic conditions and public health events.</li>
             </ul>
         </div>
     </div>
@@ -139,7 +149,7 @@ const data = [
     {year: 2024, affordableHousing: 250.39919617528028, shortTermRentalLaws: 0.41566925946748595, airbnbRegulations: 3.2899786088328287, hospitalityJobs: 42.36997597354586, cleaningServices: 355.9382226907395}
 ];
 
-// Housing Affordability and Regulation Search Interest Chart
+// Housing Affordability Search Interest Chart
 const housingCtx = document.getElementById('housingChart').getContext('2d');
 new Chart(housingCtx, {
     type: 'line',
@@ -150,21 +160,6 @@ new Chart(housingCtx, {
                 label: 'Affordable Housing',
                 data: data.map(d => d.affordableHousing),
                 borderColor: 'rgb(75, 192, 192)',
-                yAxisID: 'y',
-                tension: 0.1
-            },
-            {
-                label: 'Short-term Rental Laws',
-                data: data.map(d => d.shortTermRentalLaws),
-                borderColor: 'rgb(255, 99, 132)',
-                yAxisID: 'y1',
-                tension: 0.1
-            },
-            {
-                label: 'Airbnb Regulations',
-                data: data.map(d => d.airbnbRegulations),
-                borderColor: 'rgb(54, 162, 235)',
-                yAxisID: 'y1',
                 tension: 0.1
             }
         ]
@@ -172,37 +167,55 @@ new Chart(housingCtx, {
     options: {
         responsive: true,
         maintainAspectRatio: false,
-        interaction: {
-            mode: 'index',
-            intersect: false,
-        },
-        stacked: false,
         scales: {
             y: {
-                type: 'linear',
-                display: true,
-                position: 'left',
+                beginAtZero: true,
                 title: {
                     display: true,
-                    text: 'Affordable Housing'
+                    text: 'Search Interest'
                 }
-            },
-            y1: {
-                type: 'linear',
-                display: true,
-                position: 'right',
-                title: {
-                    display: true,
-                    text: 'Regulations'
-                },
-                grid: {
-                    drawOnChartArea: false,
-                },
             }
         }
     }
 });
-// Labor Market and Regulation Search Interest Chart
+
+// Short-term Rental Regulations Search Interest Chart
+const regulationCtx = document.getElementById('regulationChart').getContext('2d');
+new Chart(regulationCtx, {
+    type: 'line',
+    data: {
+        labels: data.map(d => d.year),
+        datasets: [
+            {
+                label: 'Short-term Rental Laws',
+                data: data.map(d => d.shortTermRentalLaws),
+                borderColor: 'rgb(255, 99, 132)',
+                tension: 0.1
+            },
+            {
+                label: 'Airbnb Regulations',
+                data: data.map(d => d.airbnbRegulations),
+                borderColor: 'rgb(54, 162, 235)',
+                tension: 0.1
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Search Interest'
+                }
+            }
+        }
+    }
+});
+
+// Labor Market Search Interest Chart
 const laborCtx = document.getElementById('laborChart').getContext('2d');
 new Chart(laborCtx, {
     type: 'line',
@@ -213,28 +226,12 @@ new Chart(laborCtx, {
                 label: 'Hospitality Jobs',
                 data: data.map(d => d.hospitalityJobs),
                 borderColor: 'rgb(255, 159, 64)',
-                yAxisID: 'y',
                 tension: 0.1
             },
             {
                 label: 'Cleaning Services',
                 data: data.map(d => d.cleaningServices),
                 borderColor: 'rgb(153, 102, 255)',
-                yAxisID: 'y',
-                tension: 0.1
-            },
-            {
-                label: 'Short-term Rental Laws',
-                data: data.map(d => d.shortTermRentalLaws),
-                borderColor: 'rgb(255, 99, 132)',
-                yAxisID: 'y1',
-                tension: 0.1
-            },
-            {
-                label: 'Airbnb Regulations',
-                data: data.map(d => d.airbnbRegulations),
-                borderColor: 'rgb(54, 162, 235)',
-                yAxisID: 'y1',
                 tension: 0.1
             }
         ]
@@ -242,32 +239,13 @@ new Chart(laborCtx, {
     options: {
         responsive: true,
         maintainAspectRatio: false,
-        interaction: {
-            mode: 'index',
-            intersect: false,
-        },
-        stacked: false,
         scales: {
             y: {
-                type: 'linear',
-                display: true,
-                position: 'left',
+                beginAtZero: true,
                 title: {
                     display: true,
-                    text: 'Jobs and Services'
+                    text: 'Search Interest'
                 }
-            },
-            y1: {
-                type: 'linear',
-                display: true,
-                position: 'right',
-                title: {
-                    display: true,
-                    text: 'Regulations'
-                },
-                grid: {
-                    drawOnChartArea: false,
-                },
             }
         }
     }
@@ -327,47 +305,4 @@ function generateCorrelationTable() {
         <tr>
             <td>${item.variable1}</td>
             <td>${item.variable2}</td>
-            <td>${item.correlation.toFixed(2)}</td>
-            <td>${strength} ${item.correlation >= 0 ? 'Positive' : 'Negative'}</td>
-        </tr>
-        `;
-    });
-    tableHTML += '</table>';
-    return tableHTML;
-}
-
-// Wait for the DOM to be fully loaded before inserting the table
-document.addEventListener('DOMContentLoaded', function() {
-    const correlationContainer = document.getElementById('correlation-table');
-    if (correlationContainer) {
-        correlationContainer.innerHTML = generateCorrelationTable();
-    } else {
-        console.error('Correlation table container not found');
-    }
-});
-</script>
-
-<div class="container">
-    <h2>Correlation Analysis of Search Interest (2010-2024)</h2>
-    <div id="correlation-table"></div>
-    <div class="explanation">
-        <p>This table shows the correlations between search interests for various terms related to short-term rental regulations, housing affordability, and labor market indicators over the 15-year period from 2010 to 2024. Key points to consider:</p>
-        <ul>
-            <li>The correlation between search interests for short-term rental laws/Airbnb regulations and affordable housing may indicate how public attention to these topics has evolved together over time.</li>
-            <li>The relationship between regulation-related searches and hospitality jobs searches might reflect public awareness of how these regulations could impact the job market.</li>
-            <li>Correlations with cleaning services searches could suggest changing perceptions about the short-term rental industry's impact on related services.</li>
-            <li>These correlations are based on search interest data from Google Trends, where values represent probabilities multiplied by 10 million. They reflect public attention and concerns, not necessarily real-world conditions or policy effectiveness.</li>
-            <li>The differing scales of search volumes (e.g., affordable housing having much higher volumes than regulation terms) may influence correlation results and should be considered in interpretation.</li>
-        </ul>
-        <p>Note: Correlation values range from -1 (perfect negative correlation) to 1 (perfect positive correlation). 0 indicates no correlation.</p>
-        <p>Strength guide:</p>
-        <ul>
-            <li>0.7 to 1.0 (or -0.7 to -1.0): Strong correlation</li>
-            <li>0.5 to 0.7 (or -0.5 to -0.7): Moderate correlation</li>
-            <li>0.3 to 0.5 (or -0.3 to -0.5): Weak correlation</li>
-            <li>0.0 to 0.3 (or 0.0 to -0.3): Very weak correlation</li>
-        </ul>
-    </div>
-</div>
-</body>
-</html>
+            <td>${item.
