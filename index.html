@@ -3,353 +3,515 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Short-term Rental Regulations Impact Analysis (2010-2024)</title>
+    <title>Family Financial Planning Calculator</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            max-width: 100%; 
+            margin: 0 auto; 
+            padding: 20px; 
+            line-height: 1.6; 
             color: #333;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
             background-color: #f5f5f5;
         }
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+        h1 { color: white; }
+        .page { display: none; }
+        .page.active { display: block; }
+        .form-group { margin-bottom: 20px; }
+        label { 
+            display: block; 
+            margin-bottom: 5px; 
+            font-weight: 500; 
+            color: #555;
         }
-        h1, h2, h3 {
-            color: #2c3e50;
+        h2, h3 { color: #1976D2; }
+        input[type="number"], input[type="radio"], select { 
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #ddd; 
+            border-radius: 4px; 
+            font-size: 16px;
+            transition: border-color 0.3s;
         }
-        .chart-container {
-            position: relative;
-            height: 400px;
+        input[type="number"]:focus, select:focus {
+            border-color: #1976D2;
+            outline: none;
+        }
+        input[type="radio"] { 
+            width: auto; 
+            margin-right: 10px; 
+        }
+        button { 
+            padding: 10px 20px; 
+            background-color: #1976D2; 
+            color: white; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            margin-right: 10px; 
+            margin-bottom: 10px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover { background-color: #1565C0; }
+        .explanation { 
+            background-color: #E3F2FD; 
+            border-left: 4px solid #1976D2; 
+            padding: 15px; 
+            margin-bottom: 20px; 
+            border-radius: 0 4px 4px 0;
+        }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 20px; 
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        }
+        th, td { 
+            border: 1px solid #ddd; 
+            padding: 12px; 
+            text-align: left; 
+        }
+        th { 
+            background-color: #1976D2; 
+            color: white;
+        }
+        .section { 
+            margin-bottom: 30px; 
+            background-color: white;
+            border-radius: 4px;
+            padding: 20px; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        }
+        .header { 
+            text-align: left; 
+            margin-bottom: 20px; 
+            display: flex;
+            align-items: center;
+            background-color: #1976D2;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .logo { 
+            max-width: 100px; 
+            height: auto; 
+            margin-right: 20px; 
+        }
+        .title-box {
+            flex-grow: 1;
+        }
+        .info-link { 
+            font-size: 0.9em; 
+            margin-bottom: 5px; 
+            color: #1976D2;
+        }
+        .material-icons {
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        #resultsPage {
+            margin-bottom: 40px;
+        }
+        #financialImpactChart {
             width: 100%;
+            max-width: 600px;
+            height: auto;
+            margin: 0 auto;
         }
-        .explanation {
-            background-color: #e3f2fd;
-            border-left: 4px solid #2196f3;
-            padding: 15px;
-            margin-top: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
+        @media (max-width: 600px) {
+            button {
+                width: 100%;
+                margin-right: 0;
+            }
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .logo {
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Short-term Rental Regulations Impact Analysis (2010-2024)</h1>
-        <p>This internal presentation was prepared by <a href="https://sglasgow.com" target="_blank">Scott Glasgow</a> from <a href="https://finmango.org" target="_blank">FinMango</a> for <a href="https://www.ivybusiness.iastate.edu/directory/czhang1/" target="_blank">Chen Zhang, PhD</a> from Iowa State University to help analyze Google search trends related to short-term rental regulations, housing affordability, and labor markets over a 15-year period.</p>
-    </div>
-
-    <div class="container">
-        <h2>Understanding the Data</h2>
-        <p>The data used in this analysis represents Google search query volumes for various terms related to short-term rentals from 2010 to 2024. Here's what you need to know:</p>
-        <ul>
-            <li><strong>Data Source:</strong> Google Trends API.</li>
-            <li><strong>Data Format:</strong> The values represent the probability of a search term multiplied by 10 million.</li>
-            <li><strong>Interpretation:</strong> Higher values indicate greater search interest for a particular term relative to other terms in the dataset.</li>
-            <li><strong>Time Range:</strong> The data covers the period from 2010 to 2024, allowing us to observe long-term trends in public interest regarding these topics.</li>
-        </ul>
-    </div>
-
-    <div class="container">
-        <h2>Search Interest: Housing Affordability and Regulations</h2>
-        <div class="chart-container">
-            <canvas id="housingChart"></canvas>
+    <div class="header">
+        <img src="your-logo.png" alt="Company Logo" class="logo">
+        <div class="title-box">
+            <h1>Family Financial Planning Calculator</h1>
         </div>
+    </div>
+    <div id="introPage" class="page active">
+        <h2>Financial Outlook for Couples</h2>
         <div class="explanation">
-            <p>This chart shows the trends in search interest for affordable housing, short-term rental laws, and Airbnb regulations from 2010 to 2024. Key observations:</p>
-            <ul>
-                <li>Search interest in affordable housing has generally increased over the 15-year period, indicating growing public concern or awareness.</li>
-                <li>Interest in short-term rental laws and Airbnb regulations began to appear in searches around 2015, with significant increases after 2020.</li>
-                <li>The rise in searches for regulatory terms may reflect increasing public awareness of policy changes or debates surrounding short-term rentals.</li>
-                <li>Note the different scales: Affordable housing searches are much more frequent than regulation-related searches.</li>
-            </ul>
+            <p><span class="material-icons">info</span> This calculator, a collaboration between <a href="https://finmango.org" target="_blank">FinMango</a> and <a href="https://modernhusbands.com" target="_blank">Modern Husbands</a>, helps dual-income families and couples evaluate their financial trajectory over the next 15 years. It considers factors such as household income, potential career breaks, childcare costs, healthcare expenses, basic living expenses, taxes, and retirement savings.</p>
+            <p>We've pre-populated the fields with example numbers. Feel free to adjust these to match your specific situation.</p>
+        </div>
+        <div class="button-container">
+            <button onclick="showPage('incomePage')"><span class="material-icons">arrow_forward</span> Let's Get Started</button>
         </div>
     </div>
-
-    <div class="container">
-        <h2>Search Interest: Labor Market and Regulations</h2>
-        <div class="chart-container">
-            <canvas id="laborChart"></canvas>
+<div id="incomePage" class="page">
+    <h2>Household Income Information</h2>
+    <div class="section">
+        <h3>Family Type</h3>
+        <div class="form-group">
+            <label>
+                <input type="radio" name="familyType" value="withChildren" checked> Family with Children
+            </label>
+            <label>
+                <input type="radio" name="familyType" value="dink"> DINK (Dual Income No Kids)
+            </label>
         </div>
+    </div>
+    <div class="section">
+        <h3>Household Income</h3>
         <div class="explanation">
-            <p>This chart illustrates the trends in search interest for hospitality jobs, cleaning services, and short-term rental regulations from 2010 to 2024. Key observations:</p>
-            <ul>
-                <li>Search interest in cleaning services has shown a general increase over the 15-year period, potentially indicating growing demand or awareness of these services.</li>
-                <li>Interest in hospitality jobs has fluctuated, with a notable spike in 2020 followed by a sharp decline, possibly reflecting job market changes during the COVID-19 pandemic.</li>
-                <li>The emergence of searches for short-term rental laws and Airbnb regulations coincides with changes in search patterns for hospitality jobs and cleaning services, particularly after 2015.</li>
-                <li>Again, note the different scales: Cleaning services and hospitality jobs have much higher search volumes than the regulation-related terms.</li>
-            </ul>
+            <p><span class="material-icons">monetization_on</span> Enter the annual salary for each spouse/partner.</p>
+        </div>
+        <div class="form-group">
+            <label for="salary1">Spouse / Partner #1 Annual Salary ($)</label>
+            <input type="number" id="salary1" value="75000" step="0.01" required>
+        </div>
+        <div class="form-group">
+            <label for="salary2">Spouse / Partner #2 Annual Salary ($)</label>
+            <input type="number" id="salary2" value="65000" step="0.01" required>
+        </div>
+        <div class="form-group">
+            <label for="workforceLeaveDuration1">If Spouse / Partner #1 plans to leave the workforce without pay, enter the amount of time:</label>
+            <select id="workforceLeaveDuration1">
+                <option value="0">No leave</option>
+                <option value="0.5">0.5 years</option>
+                <option value="1">1 year</option>
+                <option value="1.5">1.5 years</option>
+                <option value="2">2 years</option>
+                <option value="2.5">2.5 years</option>
+                <option value="3">3 years</option>
+                <option value="3.5">3.5 years</option>
+                <option value="4">4 years</option>
+                <option value="4.5">4.5 years</option>
+                <option value="5">5 years</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="workforceLeaveDuration2">If Spouse / Partner #2 plans to leave the workforce without pay, enter the amount of time:</label>
+            <select id="workforceLeaveDuration2">
+                <option value="0">No leave</option>
+                <option value="0.5">0.5 years</option>
+                <option value="1">1 year</option>
+                <option value="1.5">1.5 years</option>
+                <option value="2">2 years</option>
+                <option value="2.5">2.5 years</option>
+                <option value="3">3 years</option>
+                <option value="3.5">3.5 years</option>
+                <option value="4">4 years</option>
+                <option value="4.5">4.5 years</option>
+                <option value="5">5 years</option>
+            </select>
         </div>
     </div>
-<script>
-    // Extended data for charts (2010-2024)
-    const data = [
-        {year: 2010, affordableHousing: 115.399164275319, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 51.46087561993374, cleaningServices: 157.81408778299829},
-        {year: 2011, affordableHousing: 109.56786122028467, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 50.39023879751689, cleaningServices: 176.43337599897498},
-        {year: 2012, affordableHousing: 113.74700737179207, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 42.944644376650054, cleaningServices: 186.65452188695397},
-        {year: 2013, affordableHousing: 110.48467323824269, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 40.342625000893975, cleaningServices: 189.8054550695624},
-        {year: 2014, affordableHousing: 129.65277589570394, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 44.79594341418581, cleaningServices: 190.86349636498315},
-        {year: 2015, affordableHousing: 131.7475438853553, shortTermRentalLaws: 0, airbnbRegulations: 0.4987942116854808, hospitalityJobs: 41.5246197654157, cleaningServices: 185.65361630122044},
-        {year: 2016, affordableHousing: 140.5995449162007, shortTermRentalLaws: 0, airbnbRegulations: 0.4988760072311675, hospitalityJobs: 40.10859033181687, cleaningServices: 213.54150575518375},
-        {year: 2017, affordableHousing: 155.35963566937943, shortTermRentalLaws: 0, airbnbRegulations: 1.237074587917812, hospitalityJobs: 36.832256044465055, cleaningServices: 251.68124102202603},
-        {year: 2018, affordableHousing: 159.06869983111304, shortTermRentalLaws: 0, airbnbRegulations: 1.640574275192699, hospitalityJobs: 37.49061266615435, cleaningServices: 247.8389420957562},
-        {year: 2019, affordableHousing: 169.26667714891343, shortTermRentalLaws: 0, airbnbRegulations: 2.762517925069709, hospitalityJobs: 38.286828601686594, cleaningServices: 249.31334054134945},
-        {year: 2020, affordableHousing: 173.07956777999712, shortTermRentalLaws: 0.2989023199772414, airbnbRegulations: 2.7374573367521973, hospitalityJobs: 54.72271728034296, cleaningServices: 291.29901576954666},
-        {year: 2021, affordableHousing: 131.4838125842884, shortTermRentalLaws: 0.35790945103214, airbnbRegulations: 1.924517416426108, hospitalityJobs: 30.40617577230923, cleaningServices: 340.08353409431925},
-        {year: 2022, affordableHousing: 217.16287834738827, shortTermRentalLaws: 0.766430105420579, airbnbRegulations: 3.7444808891378774, hospitalityJobs: 32.61457681066526, cleaningServices: 347.71182772936726},
-        {year: 2023, affordableHousing: 236.5670413498023, shortTermRentalLaws: 0.6673860168824454, airbnbRegulations: 4.1337422690960235, hospitalityJobs: 37.555688573045295, cleaningServices: 367.6084868377735},
-        {year: 2024, affordableHousing: 250.39919617528028, shortTermRentalLaws: 0.41566925946748595, airbnbRegulations: 3.2899786088328287, hospitalityJobs: 42.36997597354586, cleaningServices: 355.9382226907395}
-    ];
-
-    // Housing Affordability and Regulation Search Interest Chart
-    const housingCtx = document.getElementById('housingChart').getContext('2d');
-    new Chart(housingCtx, {
-        type: 'line',
-        data: {
-            labels: data.map(d => d.year),
-            datasets: [
-                {
-                    label: 'Affordable Housing',
-                    data: data.map(d => d.affordableHousing),
-                    borderColor: 'rgb(75, 192, 192)',
-                    yAxisID: 'y',
-                    tension: 0.1
-                },
-                {
-                    label: 'Short-term Rental Laws',
-                    data: data.map(d => d.shortTermRentalLaws),
-                    borderColor: 'rgb(255, 99, 132)',
-                    yAxisID: 'y1',
-                    tension: 0.1
-                },
-                {
-                    label: 'Airbnb Regulations',
-                    data: data.map(d => d.airbnbRegulations),
-                    borderColor: 'rgb(54, 162, 235)',
-                    yAxisID: 'y1',
-                    tension: 0.1
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            interaction: {
-                mode: 'index',
-                intersect: false,
-            },
-            stacked: false,
-            scales: {
-                y: {
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
-                    title: {
-                        display: true,
-                        text: 'Affordable Housing'
-                    }
-                },
-                y1: {
-                    type: 'linear',
-                    display: true,
-                    position: 'right',
-                    title: {
-                        display: true,
-                        text: 'Regulations'
-                    },
-                    grid: {
-                        drawOnChartArea: false,
-                    },
-                }
-            }
-        }
-    });
-
-    // Labor Market and Regulation Search Interest Chart
-    const laborCtx = document.getElementById('laborChart').getContext('2d');
-    new Chart(laborCtx, {
-        type: 'line',
-        data: {
-            labels: data.map(d => d.year),
-            datasets: [
-                {
-                    label: 'Hospitality Jobs',
-                    data: data.map(d => d.hospitalityJobs),
-                    borderColor: 'rgb(255, 159, 64)',
-                    yAxisID: 'y',
-                    tension: 0.1
-                },
-                {
-                    label: 'Cleaning Services',
-                    data: data.map(d => d.cleaningServices),
-                    borderColor: 'rgb(153, 102, 255)',
-                    yAxisID: 'y',
-                    tension: 0.1
-                },
-                {
-                    label: 'Short-term Rental Laws',
-                    data: data.map(d => d.shortTermRentalLaws),
-                    borderColor: 'rgb(255, 99, 132)',
-                    yAxisID: 'y1',
-                    tension: 0.1
-                },
-                {
-                    label: 'Airbnb Regulations',
-                    data: data.map(d => d.airbnbRegulations),
-                    borderColor: 'rgb(54, 162, 235)',
-                    yAxisID: 'y1',
-                    tension: 0.1
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            interaction: {
-                mode: 'index',
-                intersect: false,
-            },
-            stacked: false,
-            scales: {
-                y: {
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
-                    title: {
-                        display: true,
-                        text: 'Jobs and Services'
-                    }
-                },
-                y1: {
-                    type: 'linear',
-                    display: true,
-                    position: 'right',
-                    title: {
-                        display: true,
-                        text: 'Regulations'
-                    },
-                    grid: {
-                        drawOnChartArea: false,
-                    },
-                }
-            }
-        }
-    });
-// Function to calculate correlation
-    function correlation(x, y) {
-        const n = x.length;
-        let sum_x = 0, sum_y = 0, sum_xy = 0, sum_x2 = 0, sum_y2 = 0;
-        for (let i = 0; i < n; i++) {
-            sum_x += x[i];
-            sum_y += y[i];
-            sum_xy += x[i] * y[i];
-            sum_x2 += x[i] * x[i];
-            sum_y2 += y[i] * y[i];
-        }
-        const numerator = n * sum_xy - sum_x * sum_y;
-        const denominator = Math.sqrt((n * sum_x2 - sum_x * sum_x) * (n * sum_y2 - sum_y * sum_y));
-        return denominator === 0 ? 0 : numerator / denominator;
-    }
-
-    // Calculate correlations
-    const correlationData = [
-        { variable1: 'Short-term rental laws', variable2: 'Affordable housing', correlation: correlation(data.map(d => d.shortTermRentalLaws), data.map(d => d.affordableHousing)) },
-        { variable1: 'Short-term rental laws', variable2: 'Hospitality jobs', correlation: correlation(data.map(d => d.shortTermRentalLaws), data.map(d => d.hospitalityJobs)) },
-        { variable1: 'Short-term rental laws', variable2: 'Cleaning services', correlation: correlation(data.map(d => d.shortTermRentalLaws), data.map(d => d.cleaningServices)) },
-        { variable1: 'Airbnb regulations', variable2: 'Affordable housing', correlation: correlation(data.map(d => d.airbnbRegulations), data.map(d => d.affordableHousing)) },
-        { variable1: 'Airbnb regulations', variable2: 'Hospitality jobs', correlation: correlation(data.map(d => d.airbnbRegulations), data.map(d => d.hospitalityJobs)) },
-        { variable1: 'Airbnb regulations', variable2: 'Cleaning services', correlation: correlation(data.map(d => d.airbnbRegulations), data.map(d => d.cleaningServices)) },
-        { variable1: 'Affordable housing', variable2: 'Hospitality jobs', correlation: correlation(data.map(d => d.affordableHousing), data.map(d => d.hospitalityJobs)) },
-        { variable1: 'Affordable housing', variable2: 'Cleaning services', correlation: correlation(data.map(d => d.affordableHousing), data.map(d => d.cleaningServices)) }
-    ];
-
-    // Function to generate correlation table HTML
-    function generateCorrelationTable() {
-        let tableHTML = `
-            <table>
-                <tr>
-                    <th>Variable 1</th>
-                    <th>Variable 2</th>
-                    <th>Correlation</th>
-                    <th>Strength</th>
-                </tr>
-        `;
-
-        correlationData.forEach(item => {
-            let strength;
-            if (Math.abs(item.correlation) >= 0.7) {
-                strength = 'Strong';
-            } else if (Math.abs(item.correlation) >= 0.5) {
-                strength = 'Moderate';
-            } else if (Math.abs(item.correlation) >= 0.3) {
-                strength = 'Weak';
-            } else {
-                strength = 'Very Weak';
-            }
-
-            tableHTML += `
-                <tr>
-                    <td>${item.variable1}</td>
-                    <td>${item.variable2}</td>
-                    <td>${item.correlation.toFixed(2)}</td>
-                    <td>${strength} ${item.correlation >= 0 ? 'Positive' : 'Negative'}</td>
-                </tr>
-            `;
-        });
-
-        tableHTML += '</table>';
-        return tableHTML;
-    }
-
-    // Wait for the DOM to be fully loaded before inserting the table
-    document.addEventListener('DOMContentLoaded', function() {
-        const correlationContainer = document.getElementById('correlation-table');
-        if (correlationContainer) {
-            correlationContainer.innerHTML = generateCorrelationTable();
-        } else {
-            console.error('Correlation table container not found');
-        }
-    });
-</script>
-
-<div class="container">
-    <h2>Correlation Analysis of Search Interest (2010-2024)</h2>
-    <div id="correlation-table"></div>
-    <div class="explanation">
-        <p>This table shows the correlations between search interests for various terms related to short-term rental regulations, housing affordability, and labor market indicators over the 15-year period from 2010 to 2024. Key points to consider:</p>
-        <ul>
-            <li>The correlation between search interests for short-term rental laws/Airbnb regulations and affordable housing may indicate how public attention to these topics has evolved together over time.</li>
-            <li>The relationship between regulation-related searches and hospitality jobs searches might reflect public awareness of how these regulations could impact the job market.</li>
-            <li>Correlations with cleaning services searches could suggest changing perceptions about the short-term rental industry's impact on related services.</li>
-            <li>These correlations are based on search interest data from Google Trends, where values represent probabilities multiplied by 10 million. They reflect public attention and concerns, not necessarily real-world conditions or policy effectiveness.</li>
-            <li>The differing scales of search volumes (e.g., affordable housing having much higher volumes than regulation terms) may influence correlation results and should be considered in interpretation.</li>
-        </ul>
-        <p>Note: Correlation values range from -1 (perfect negative correlation) to 1 (perfect positive correlation). 0 indicates no correlation.</p>
-        <p>Strength guide:</p>
-        <ul>
-            <li>0.7 to 1.0 (or -0.7 to -1.0): Strong correlation</li>
-            <li>0.5 to 0.7 (or -0.5 to -0.7): Moderate correlation</li>
-            <li>0.3 to 0.5 (or -0.3 to -0.5): Weak correlation</li>
-            <li>0.0 to 0.3 (or 0.0 to -0.3): Very weak correlation</li>
-        </ul>
+    <div class="button-container">
+        <button onclick="showPage('introPage')"><span class="material-icons">arrow_back</span> Previous</button>
+        <button onclick="showPage('expensesPage')"><span class="material-icons">arrow_forward</span> Next: Expenses</button>
     </div>
 </div>
+
+<div id="expensesPage" class="page">
+    <h2>Expenses</h2>
+    <div id="childcareSection" class="section">
+        <h3>Additional Childcare Costs</h3>
+        <div class="explanation">
+            <p><span class="material-icons">child_care</span> Enter any additional annual childcare costs (e.g., daycare) beyond the baseline costs already included in our calculations. This will be added to our baseline for up to 5 years.</p>
+        </div>
+        <div class="form-group">
+            <label for="childCareCost">Additional Annual Childcare Cost ($)</label>
+            <div class="info-link">
+                <a href="https://www.dol.gov/agencies/wb/topics/childcare/price-by-age-care-setting" target="_blank">
+                    <span class="material-icons">link</span> Childcare Prices by Age of Children and Care Setting
+                </a>
+            </div>
+            <input type="number" id="childCareCost" value="20000" step="0.01" required>
+        </div>
+        <div class="form-group">
+            <label for="childCareYears">Number of Years Needing Additional Childcare (max 5)</label>
+            <select id="childCareYears">
+                <option value="0">No additional childcare</option>
+                <option value="0.5">0.5 years</option>
+                <option value="1">1 year</option>
+                <option value="1.5">1.5 years</option>
+                <option value="2">2 years</option>
+                <option value="2.5">2.5 years</option>
+                <option value="3">3 years</option>
+                <option value="3.5">3.5 years</option>
+                <option value="4">4 years</option>
+                <option value="4.5">4.5 years</option>
+                <option value="5" selected>5 years</option>
+            </select>
+        </div>
+    </div>
+<div class="section">
+        <h3>Basic Living Expenses and Healthcare</h3>
+        <div class="explanation">
+            <p><span class="material-icons">home</span> Enter your total monthly basic living expenses, including healthcare costs. This should include your current costs for housing, transportation, food, utilities, and healthcare.</p>
+        </div>
+        <div class="form-group">
+            <label for="basicLivingExpenses">Total Monthly Basic Living Expenses (including Healthcare) ($)</label>
+            <input type="number" id="basicLivingExpenses" value="3483" step="0.01" required>
+            <div class="info-link">
+                <details>
+                    <summary><span class="material-icons">info</span> What does this include?</summary>
+                    <p>This total should include your current monthly expenses for:</p>
+                    <ul>
+                        <li>Housing (rent/mortgage)</li>
+                        <li>Transportation (car payments, insurance, public transit)</li>
+                        <li>Food</li>
+                        <li>Utilities</li>
+                        <li>Healthcare premiums and average out-of-pocket expenses</li>
+                    </ul>
+                    <p>The pre-filled value ($3483) is based on previous estimates: $1500 for housing, $500 for transportation, $800 for food and utilities, and $683 for healthcare (based on $5000 annual premium and $2000 annual out-of-pocket expenses, divided by 12).</p>
+                    <p><strong>Note:</strong> Do not include any future child-related expenses in this total. Those are accounted for separately.</p>
+                </details>
+            </div>
+        </div>
+    </div>
+    <div class="button-container">
+        <button onclick="showPage('incomePage')"><span class="material-icons">arrow_back</span> Previous</button>
+        <button onclick="showPage('taxesPage')"><span class="material-icons">arrow_forward</span> Next: Taxes</button>
+    </div>
+</div>
+
+<div id="taxesPage" class="page">
+    <h2>Taxes</h2>
+    <div class="section">
+        <h3>Tax Rates</h3>
+        <div class="explanation">
+            <p><span class="material-icons">description</span> Enter your estimated tax rates. These are rough estimates and may not reflect exact tax calculations.</p>
+        </div>
+        <div class="form-group">
+            <label for="federalTaxRate">Estimated Federal Tax Rate (%)</label>
+            <div class="info-link">
+                <a href="https://www.irs.gov/filing/federal-income-tax-rates-and-brackets" target="_blank">
+                    <span class="material-icons">link</span> Federal Income Tax Brackets
+                </a>
+            </div>
+            <input type="number" id="federalTaxRate" value="22" step="0.01" required>
+        </div>
+        <div class="form-group">
+            <label for="stateTaxRate">Estimated State Tax Rate (%)</label>
+            <div class="info-link">
+                <a href="https://help.nfc.usda.gov/systems/TAXES/index.php" target="_blank">
+                    <span class="material-icons">link</span> State Income Tax Brackets
+                </a>
+            </div>
+            <input type="number" id="stateTaxRate" value="5" step="0.01" required>
+        </div>
+        <div class="form-group">
+            <label for="localTaxRate">Estimated Local Tax Rate (%)</label>
+            <input type="number" id="localTaxRate" value="1" step="0.01" required>
+        </div>
+    </div>
+    <div class="button-container">
+        <button onclick="showPage('expensesPage')"><span class="material-icons">arrow_back</span> Previous</button>
+        <button onclick="showPage('projectionPage')"><span class="material-icons">arrow_forward</span> Next: Growth Projections</button>
+    </div>
+</div>
+
+<div id="projectionPage" class="page">
+    <h2>Growth Projections</h2>
+    <div class="section">
+        <h3>Future Growth and Savings</h3>
+        <div class="explanation">
+            <p><span class="material-icons">trending_up</span> Estimate how you think your salaries and expenses might change over time, and how much you plan to save for retirement.</p>
+        </div>
+        <div class="form-group">
+            <label for="salaryGrowth">Estimated Annual Salary Growth (%)</label>
+            <input type="number" id="salaryGrowth" value="3" step="0.01" required>
+        </div>
+        <div class="form-group">
+            <label for="childCareGrowth">Estimated Annual Increase in Childcare Costs (%)</label>
+            <input type="number" id="childCareGrowth" value="2" step="0.01" required>
+        </div>
+        <div class="form-group">
+            <label for="livingExpensesGrowth">Estimated Annual Increase in Living Expenses (including Healthcare) (%)</label>
+            <input type="number" id="livingExpensesGrowth" value="3" step="0.01" required>
+        </div>
+        <div class="form-group">
+            <label for="retirementContribution1">Spouse / Partner #1 Annual Retirement Contribution (%)</label>
+            <input type="number" id="retirementContribution1" value="6" step="0.01" required>
+        </div>
+        <div class="form-group">
+            <label for="employerMatch1">Spouse / Partner #1 Employer Match (%)</label>
+            <input type="number" id="employerMatch1" value="5" step="0.01" required>
+        </div>
+        <div class="form-group">
+            <label for="retirementContribution2">Spouse / Partner #2 Annual Retirement Contribution (%)</label>
+            <input type="number" id="retirementContribution2" value="6" step="0.01" required>
+        </div>
+        <div class="form-group">
+            <label for="employerMatch2">Spouse / Partner #2 Employer Match (%)</label>
+            <input type="number" id="employerMatch2" value="5" step="0.01" required>
+        </div>
+    </div>
+    <div class="button-container">
+        <button onclick="showPage('taxesPage')"><span class="material-icons">arrow_back</span> Previous</button>
+        <button onclick="calculateResults()"><span class="material-icons">calculate</span> Calculate Results</button>
+    </div>
+</div>
+
+<div id="resultsPage" class="page">
+    <h2>Projected Household Finances</h2>
+    <div class="explanation">
+        <p><span class="material-icons">info</span> Below is a projection of your household finances over the next 15 years, including income, expenses, taxes, retirement savings, and adjusting for inflation.</p>
+        <p>The Annual Cost Per Child combines your entered childcare costs with the annual cost of one child. According to the USDA, the 2024 inflation-adjusted estimated annual cost per child is around $18,000. Remember, this estimate is based on your provided information and uses simplified tax calculations.</p>
+        <p><a href="https://lp.constantcontactpages.com/sl/yL766xD" target="_blank"><span class="material-icons">download</span> Download The Ultimate Guide to Family Financial Planning</a> for free. We designed it to complement this calculator. </p>
+    </div>
+    <div class="section">
+        <h3>Projected: Income Earned Over 15 Years and Retirement Balance After 15 Years</h3>
+        <div style="height: 300px; max-width: 600px; margin: auto;">
+            <canvas id="financialImpactChart"></canvas>
+        </div>
+        <div class="explanation">
+            <p>This chart compares your current plan with two alternative scenarios over 15 years, including accumulated retirement savings with a conservative 8% annual return:</p>
+            <ul>
+                <li><strong>Current Plan:</strong> Your inputted scenario.</li>
+                <li><strong>Continuous Employment:</strong> Both partners work continuously, using childcare services.</li>
+                <li><strong>DINK Scenario:</strong> Dual Income, No Kids - for comparison purposes.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="section">
+        <h3>Detailed Yearly Projection</h3>
+        <div class="table-container">
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Gross Income</th>
+                        <th>Taxes</th>
+                        <th>Annual Cost Per Child</th>
+                        <th>Basic Living Expenses (incl. Healthcare)</th>
+                        <th>Retirement Savings</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Results will be inserted here by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="explanation">
+        <p><a href="https://finmango.org" target="_blank">FinMango</a> is a nonprofit advancing financial health worldwide and <a href="https://modernhusbands.com" target="_blank">Modern Husbands</a> helps couples manage their money and their home.</p>
+    </div>
+    <div class="button-container">
+        <button onclick="showPage('projectionPage')"><span class="material-icons">arrow_back</span> Previous</button>
+        <button onclick="showPage('incomePage')"><span class="material-icons">refresh</span> Start Over</button>
+    </div>
+</div>
+
+<script>
+    function showPage(pageId) {
+        document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+        if (pageId === 'expensesPage') {
+            const isDINK = document.querySelector('input[name="familyType"]:checked').value === 'dink';
+            document.getElementById('childcareSection').style.display = isDINK ? 'none' : 'block';
+        }
+    }
+
+    function calculateResults() {
+        // Your existing calculation logic here
+        // ...
+
+        createFinancialImpactChart(currentScenarioTotal, currentScenarioRetirementSavings, 
+                                   continuousEmploymentTotal, continuousEmploymentRetirementSavings, 
+                                   dinkScenarioTotal, dinkScenarioRetirementSavings);
+
+        showPage('resultsPage');
+    }
+
+    function createFinancialImpactChart(currentTotal, currentRetirement, continuousTotal, continuousRetirement, dinkTotal, dinkRetirement) {
+        const ctx = document.getElementById('financialImpactChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Current Plan', 'Continuous Employment', 'DINK Scenario'],
+                datasets: [{
+                    label: 'Total Financial Impact Over 15 Years',
+                    data: [
+                        Math.round(currentTotal + currentRetirement),
+                        Math.round(continuousTotal + continuousRetirement),
+                        Math.round(dinkTotal + dinkRetirement)
+                    ],
+                    backgroundColor: [
+                        'rgba(25, 118, 210, 0.8)',
+                        'rgba(56, 142, 60, 0.8)',
+                        'rgba(245, 124, 0, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(25, 118, 210, 1)',
+                        'rgba(56, 142, 60, 1)',
+                        'rgba(245, 124, 0, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value.toLocaleString();
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += '$' + context.parsed.y.toLocaleString();
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Initialize the calculator
+    document.addEventListener('DOMContentLoaded', function() {
+        showPage('introPage');
+    });
+
+    // Add event listeners for family type radio buttons
+    document.querySelectorAll('input[name="familyType"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            const isDINK = this.value === 'dink';
+            document.getElementById('childcareSection').style.display = isDINK ? 'none' : 'block';
+        });
+    });
+</script>
 </body>
 </html>
