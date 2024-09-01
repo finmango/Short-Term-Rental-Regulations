@@ -55,85 +55,90 @@
 <body>
     <div class="container">
         <h1>Short-term Rental Regulations Impact Analysis (2010-2024)</h1>
-        <p>This application presents findings on the impact of short-term rental regulations on housing affordability, labor markets, and socioeconomic factors over a 15-year period.</p>
+        <p>This application presents findings on the impact of short-term rental regulations on housing affordability, labor markets, and socioeconomic factors over a 15-year period, focusing on year-over-year growth rates.</p>
     </div>
 
     <div class="container">
         <h2>Understanding the Data</h2>
         <p>The data used in this analysis represents various economic and regulatory indicators related to short-term rentals from 2010 to 2024. Here's what you need to know:</p>
         <ul>
-            <li><strong>Values Representation:</strong> All values in the dataset are probabilities multiplied by 10 million. This scaling was done to make the numbers more manageable and easier to compare.</li>
-            <li><strong>Interpretation:</strong> A value of 1,000,000 in the dataset represents a 10% probability or rate. For example, if the "Affordable housing" value is 1,317,475, it means there's approximately a 13.17% affordability rate.</li>
+            <li><strong>Growth Rate Calculation:</strong> We've calculated year-over-year growth rates for each indicator to better understand trends and relationships.</li>
+            <li><strong>Interpretation:</strong> Growth rates are expressed as percentages. For example, a 5% growth rate in affordable housing means it increased by 5% compared to the previous year.</li>
             <li><strong>Time Range:</strong> The data covers the period from 2010 to 2024, allowing us to observe long-term trends and the evolution of regulations' impact.</li>
         </ul>
-        <p>Here's a sample of the data to illustrate:</p>
+        <p>Here's a sample of the growth rate data to illustrate:</p>
         <table>
             <tr>
                 <th>Year</th>
-                <th>Affordable Housing</th>
-                <th>Short-term Rental Laws</th>
-                <th>Airbnb Regulations</th>
+                <th>Affordable Housing Growth</th>
+                <th>Short-term Rental Laws Growth</th>
+                <th>Airbnb Regulations Growth</th>
             </tr>
             <tr>
-                <td>2010</td>
-                <td>11.54% (1,153,992)</td>
-                <td>0% (0)</td>
-                <td>0% (0)</td>
+                <td>2011</td>
+                <td>-5.05%</td>
+                <td>0%</td>
+                <td>0%</td>
             </tr>
             <tr>
                 <td>2015</td>
-                <td>13.17% (1,317,475)</td>
-                <td>0% (0)</td>
-                <td>0.05% (4,988)</td>
+                <td>1.61%</td>
+                <td>0%</td>
+                <td>N/A (First year of implementation)</td>
             </tr>
             <tr>
                 <td>2020</td>
-                <td>17.31% (1,730,796)</td>
-                <td>0.03% (2,989)</td>
-                <td>0.27% (27,375)</td>
+                <td>2.25%</td>
+                <td>N/A (First year of implementation)</td>
+                <td>-0.91%</td>
             </tr>
             <tr>
                 <td>2024</td>
-                <td>25.04% (2,503,992)</td>
-                <td>0.04% (4,157)</td>
-                <td>0.33% (32,900)</td>
+                <td>5.85%</td>
+                <td>-37.75%</td>
+                <td>-20.41%</td>
             </tr>
         </table>
     </div>
 
     <div class="container">
-        <h2>Housing Affordability and Regulation Trends</h2>
+        <h2>Housing Affordability and Regulation Growth Trends</h2>
         <div class="chart-container">
             <canvas id="housingChart"></canvas>
         </div>
         <div class="explanation">
-            <p>This chart shows the trends in affordable housing, short-term rental laws, and Airbnb regulations from 2010 to 2024. Key observations:</p>
+            <p>This chart shows the growth trends in affordable housing, short-term rental laws, and Airbnb regulations from 2010 to 2024. Key observations:</p>
             <ul>
-                <li>Affordable housing values have generally increased over the 15-year period, with some fluctuations.</li>
-                <li>Short-term rental laws and Airbnb regulations began to be implemented around 2015, with significant increases after 2020.</li>
-                <li>There appears to be a correlation between the introduction and strengthening of regulations and the increase in affordable housing values, particularly in recent years.</li>
+                <li>Affordable housing growth rates have fluctuated over the 15-year period, with notable changes in recent years.</li>
+                <li>Short-term rental laws and Airbnb regulations show volatile growth rates, particularly after their initial implementation.</li>
+                <li>The relationship between regulation growth and affordable housing growth may indicate potential impacts of policy changes on housing affordability.</li>
             </ul>
         </div>
     </div>
 
     <div class="container">
-        <h2>Labor Market and Regulation Trends</h2>
+        <h2>Labor Market and Regulation Growth Trends</h2>
         <div class="chart-container">
             <canvas id="laborChart"></canvas>
         </div>
         <div class="explanation">
-            <p>This chart illustrates the trends in hospitality jobs, cleaning services, and short-term rental regulations from 2010 to 2024. Key observations:</p>
+            <p>This chart illustrates the growth trends in hospitality jobs, cleaning services, and short-term rental regulations from 2010 to 2024. Key observations:</p>
             <ul>
-                <li>Cleaning services have shown a steady increase over the 15-year period.</li>
-                <li>Hospitality jobs have fluctuated, with a notable spike in 2020 followed by a sharp decline, possibly due to the COVID-19 pandemic.</li>
-                <li>The implementation of short-term rental laws and Airbnb regulations appears to coincide with changes in both hospitality jobs and cleaning services, particularly after 2015.</li>
+                <li>Cleaning services growth has shown variations over the 15-year period, with some years of significant expansion.</li>
+                <li>Hospitality jobs growth has been volatile, with a notable spike followed by a sharp decline around 2020, possibly reflecting the impact of the COVID-19 pandemic.</li>
+                <li>The growth patterns in short-term rental laws and Airbnb regulations appear to coincide with shifts in both hospitality and cleaning service sector growth, particularly in recent years.</li>
             </ul>
         </div>
     </div>
+<script>
+        // Function to calculate year-over-year growth rate
+        function calculateGrowthRate(currentValue, previousValue) {
+            if (previousValue === 0) return null; // Avoid division by zero
+            return ((currentValue - previousValue) / previousValue) * 100;
+        }
 
-    <script>
         // Extended data for charts (2010-2024)
-        const data = [
+        const rawData = [
             {year: 2010, affordableHousing: 115.399164275319, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 51.46087561993374, cleaningServices: 157.81408778299829},
             {year: 2011, affordableHousing: 109.56786122028467, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 50.39023879751689, cleaningServices: 176.43337599897498},
             {year: 2012, affordableHousing: 113.74700737179207, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 42.944644376650054, cleaningServices: 186.65452188695397},
@@ -151,7 +156,30 @@
             {year: 2024, affordableHousing: 250.39919617528028, shortTermRentalLaws: 0.41566925946748595, airbnbRegulations: 3.2899786088328287, hospitalityJobs: 42.36997597354586, cleaningServices: 355.9382226907395}
         ];
 
-        // Housing Affordability and Regulation Trends Chart
+        // Calculate growth rates
+        const data = rawData.map((current, index, array) => {
+            if (index === 0) {
+                return {
+                    year: current.year,
+                    affordableHousingGrowth: 0,
+                    shortTermRentalLawsGrowth: 0,
+                    airbnbRegulationsGrowth: 0,
+                    hospitalityJobsGrowth: 0,
+                    cleaningServicesGrowth: 0
+                };
+            }
+            const previous = array[index - 1];
+            return {
+                year: current.year,
+                affordableHousingGrowth: calculateGrowthRate(current.affordableHousing, previous.affordableHousing),
+                shortTermRentalLawsGrowth: calculateGrowthRate(current.shortTermRentalLaws, previous.shortTermRentalLaws),
+                airbnbRegulationsGrowth: calculateGrowthRate(current.airbnbRegulations, previous.airbnbRegulations),
+                hospitalityJobsGrowth: calculateGrowthRate(current.hospitalityJobs, previous.hospitalityJobs),
+                cleaningServicesGrowth: calculateGrowthRate(current.cleaningServices, previous.cleaningServices)
+            };
+        });
+
+        // Housing Affordability and Regulation Growth Trends Chart
         const housingCtx = document.getElementById('housingChart').getContext('2d');
         new Chart(housingCtx, {
             type: 'line',
@@ -159,25 +187,22 @@
                 labels: data.map(d => d.year),
                 datasets: [
                     {
-                        label: 'Affordable Housing',
-                        data: data.map(d => d.affordableHousing),
+                        label: 'Affordable Housing Growth',
+                        data: data.map(d => d.affordableHousingGrowth),
                         borderColor: 'rgb(75, 192, 192)',
-                        tension: 0.1,
-                        yAxisID: 'y'
+                        tension: 0.1
                     },
                     {
-                        label: 'Short-term Rental Laws',
-                        data: data.map(d => d.shortTermRentalLaws),
+                        label: 'Short-term Rental Laws Growth',
+                        data: data.map(d => d.shortTermRentalLawsGrowth),
                         borderColor: 'rgb(255, 99, 132)',
-                        tension: 0.1,
-                        yAxisID: 'y1'
+                        tension: 0.1
                     },
                     {
-                        label: 'Airbnb Regulations',
-                        data: data.map(d => d.airbnbRegulations),
+                        label: 'Airbnb Regulations Growth',
+                        data: data.map(d => d.airbnbRegulationsGrowth),
                         borderColor: 'rgb(54, 162, 235)',
-                        tension: 0.1,
-                        yAxisID: 'y1'
+                        tension: 0.1
                     }
                 ]
             },
@@ -187,7 +212,6 @@
                     mode: 'index',
                     intersect: false,
                 },
-                stacked: false,
                 scales: {
                     y: {
                         type: 'linear',
@@ -195,25 +219,13 @@
                         position: 'left',
                         title: {
                             display: true,
-                            text: 'Affordable Housing Index'
+                            text: 'Growth Rate (%)'
                         }
-                    },
-                    y1: {
-                        type: 'linear',
-                        display: true,
-                        position: 'right',
-                        title: {
-                            display: true,
-                            text: 'Regulation Index'
-                        },
-                        grid: {
-                            drawOnChartArea: false,
-                        },
-                    },
+                    }
                 }
             }
         });
-// Labor Market and Regulation Trends Chart
+// Labor Market and Regulation Growth Trends Chart
         const laborCtx = document.getElementById('laborChart').getContext('2d');
         new Chart(laborCtx, {
             type: 'line',
@@ -221,32 +233,28 @@
                 labels: data.map(d => d.year),
                 datasets: [
                     {
-                        label: 'Hospitality Jobs',
-                        data: data.map(d => d.hospitalityJobs),
+                        label: 'Hospitality Jobs Growth',
+                        data: data.map(d => d.hospitalityJobsGrowth),
                         borderColor: 'rgb(255, 159, 64)',
-                        tension: 0.1,
-                        yAxisID: 'y'
+                        tension: 0.1
                     },
                     {
-                        label: 'Cleaning Services',
-                        data: data.map(d => d.cleaningServices),
+                        label: 'Cleaning Services Growth',
+                        data: data.map(d => d.cleaningServicesGrowth),
                         borderColor: 'rgb(153, 102, 255)',
-                        tension: 0.1,
-                        yAxisID: 'y'
+                        tension: 0.1
                     },
                     {
-                        label: 'Short-term Rental Laws',
-                        data: data.map(d => d.shortTermRentalLaws),
+                        label: 'Short-term Rental Laws Growth',
+                        data: data.map(d => d.shortTermRentalLawsGrowth),
                         borderColor: 'rgb(255, 99, 132)',
-                        tension: 0.1,
-                        yAxisID: 'y1'
+                        tension: 0.1
                     },
                     {
-                        label: 'Airbnb Regulations',
-                        data: data.map(d => d.airbnbRegulations),
+                        label: 'Airbnb Regulations Growth',
+                        data: data.map(d => d.airbnbRegulationsGrowth),
                         borderColor: 'rgb(54, 162, 235)',
-                        tension: 0.1,
-                        yAxisID: 'y1'
+                        tension: 0.1
                     }
                 ]
             },
@@ -256,7 +264,6 @@
                     mode: 'index',
                     intersect: false,
                 },
-                stacked: false,
                 scales: {
                     y: {
                         type: 'linear',
@@ -264,21 +271,9 @@
                         position: 'left',
                         title: {
                             display: true,
-                            text: 'Job Index'
+                            text: 'Growth Rate (%)'
                         }
-                    },
-                    y1: {
-                        type: 'linear',
-                        display: true,
-                        position: 'right',
-                        title: {
-                            display: true,
-                            text: 'Regulation Index'
-                        },
-                        grid: {
-                            drawOnChartArea: false,
-                        },
-                    },
+                    }
                 }
             }
         });
@@ -288,25 +283,29 @@
             const n = x.length;
             let sum_x = 0, sum_y = 0, sum_xy = 0, sum_x2 = 0, sum_y2 = 0;
             for (let i = 0; i < n; i++) {
-                sum_x += x[i];
-                sum_y += y[i];
-                sum_xy += x[i] * y[i];
-                sum_x2 += x[i] * x[i];
-                sum_y2 += y[i] * y[i];
+                if (x[i] !== null && y[i] !== null) {
+                    sum_x += x[i];
+                    sum_y += y[i];
+                    sum_xy += x[i] * y[i];
+                    sum_x2 += x[i] * x[i];
+                    sum_y2 += y[i] * y[i];
+                }
             }
-            return (n * sum_xy - sum_x * sum_y) / Math.sqrt((n * sum_x2 - sum_x * sum_x) * (n * sum_y2 - sum_y * sum_y));
+            const numerator = n * sum_xy - sum_x * sum_y;
+            const denominator = Math.sqrt((n * sum_x2 - sum_x * sum_x) * (n * sum_y2 - sum_y * sum_y));
+            return denominator === 0 ? 0 : numerator / denominator;
         }
 
         // Calculate correlations
         const correlationData = [
-            { variable1: 'Short-term rental laws', variable2: 'Affordable housing', correlation: correlation(data.map(d => d.shortTermRentalLaws), data.map(d => d.affordableHousing)) },
-            { variable1: 'Short-term rental laws', variable2: 'Hospitality jobs', correlation: correlation(data.map(d => d.shortTermRentalLaws), data.map(d => d.hospitalityJobs)) },
-            { variable1: 'Short-term rental laws', variable2: 'Cleaning services', correlation: correlation(data.map(d => d.shortTermRentalLaws), data.map(d => d.cleaningServices)) },
-            { variable1: 'Airbnb regulations', variable2: 'Affordable housing', correlation: correlation(data.map(d => d.airbnbRegulations), data.map(d => d.affordableHousing)) },
-            { variable1: 'Airbnb regulations', variable2: 'Hospitality jobs', correlation: correlation(data.map(d => d.airbnbRegulations), data.map(d => d.hospitalityJobs)) },
-            { variable1: 'Airbnb regulations', variable2: 'Cleaning services', correlation: correlation(data.map(d => d.airbnbRegulations), data.map(d => d.cleaningServices)) },
-            { variable1: 'Affordable housing', variable2: 'Hospitality jobs', correlation: correlation(data.map(d => d.affordableHousing), data.map(d => d.hospitalityJobs)) },
-            { variable1: 'Affordable housing', variable2: 'Cleaning services', correlation: correlation(data.map(d => d.affordableHousing), data.map(d => d.cleaningServices)) }
+            { variable1: 'Short-term rental laws growth', variable2: 'Affordable housing growth', correlation: correlation(data.map(d => d.shortTermRentalLawsGrowth), data.map(d => d.affordableHousingGrowth)) },
+            { variable1: 'Short-term rental laws growth', variable2: 'Hospitality jobs growth', correlation: correlation(data.map(d => d.shortTermRentalLawsGrowth), data.map(d => d.hospitalityJobsGrowth)) },
+            { variable1: 'Short-term rental laws growth', variable2: 'Cleaning services growth', correlation: correlation(data.map(d => d.shortTermRentalLawsGrowth), data.map(d => d.cleaningServicesGrowth)) },
+            { variable1: 'Airbnb regulations growth', variable2: 'Affordable housing growth', correlation: correlation(data.map(d => d.airbnbRegulationsGrowth), data.map(d => d.affordableHousingGrowth)) },
+            { variable1: 'Airbnb regulations growth', variable2: 'Hospitality jobs growth', correlation: correlation(data.map(d => d.airbnbRegulationsGrowth), data.map(d => d.hospitalityJobsGrowth)) },
+            { variable1: 'Airbnb regulations growth', variable2: 'Cleaning services growth', correlation: correlation(data.map(d => d.airbnbRegulationsGrowth), data.map(d => d.cleaningServicesGrowth)) },
+            { variable1: 'Affordable housing growth', variable2: 'Hospitality jobs growth', correlation: correlation(data.map(d => d.affordableHousingGrowth), data.map(d => d.hospitalityJobsGrowth)) },
+            { variable1: 'Affordable housing growth', variable2: 'Cleaning services growth', correlation: correlation(data.map(d => d.affordableHousingGrowth), data.map(d => d.cleaningServicesGrowth)) }
         ];
 
         // Function to generate correlation table HTML
@@ -359,15 +358,15 @@
     </script>
 
     <div class="container">
-        <h2>Correlation Analysis (2010-2024)</h2>
+        <h2>Correlation Analysis of Growth Rates (2010-2024)</h2>
         <div id="correlation-table"></div>
         <div class="explanation">
-            <p>This table shows the correlations between various factors related to short-term rental regulations, housing affordability, and labor market indicators over the 15-year period from 2010 to 2024. Key observations:</p>
+            <p>This table shows the correlations between growth rates of various factors related to short-term rental regulations, housing affordability, and labor market indicators over the 15-year period from 2010 to 2024. Key observations:</p>
             <ul>
-                <li>The correlation between short-term rental laws/Airbnb regulations and affordable housing indicates the potential impact of these regulations on housing affordability over time.</li>
-                <li>The relationship between regulations and hospitality jobs shows how the implementation of these laws may have affected traditional hospitality employment in the long term.</li>
-                <li>The correlation between regulations and cleaning services reflects the potential growth in demand for professional cleaning in short-term rentals over the 15-year period.</li>
-                <li>The relationship between affordable housing and labor market indicators (hospitality jobs and cleaning services) provides insight into how changes in the housing market may have influenced job trends in these sectors.</li>
+                <li>The correlation between growth rates of short-term rental laws/Airbnb regulations and affordable housing indicates how changes in regulation implementation relate to changes in housing affordability over time.</li>
+                <li>The relationship between regulation growth and hospitality jobs growth shows how accelerations or decelerations in regulatory implementation may have affected employment trends in the hospitality sector.</li>
+                <li>The correlation between regulation growth and cleaning services growth reflects how changes in regulatory intensity may have influenced the expansion or contraction of professional cleaning services for short-term rentals.</li>
+                <li>The relationship between affordable housing growth and labor market indicators provides insight into how fluctuations in housing affordability may have corresponded with changes in job growth in these sectors.</li>
             </ul>
             <p>Note: Correlation values range from -1 (perfect negative correlation) to 1 (perfect positive correlation). 0 indicates no correlation.</p>
             <p>Strength guide:</p>
@@ -377,7 +376,7 @@
                 <li>0.3 to 0.5 (or -0.3 to -0.5): Weak correlation</li>
                 <li>0.0 to 0.3 (or 0.0 to -0.3): Very weak correlation</li>
             </ul>
-            <p>Remember that correlation does not imply causation. These relationships should be interpreted with caution and in conjunction with other economic and policy factors.</p>
+            <p>Remember that correlation does not imply causation. These relationships should be interpreted with caution and in conjunction with other economic and policy factors. The focus on growth rates provides insight into the dynamics of change rather than absolute levels.</p>
         </div>
     </div>
 </body>
