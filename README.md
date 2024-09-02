@@ -2,6 +2,12 @@
 
 Puropose of this preliminary research? To help investigate whether and under what circumstances government short-term regulations moderate the impacts of home-sharing services on local housing affordability and labor demands, which may influence income inequality and/or poverty.
 
+## Viewing the Research Findings
+To view the research findings: visit mngo.org/idea2
+
+Alternatively, you can clone the repository and open the index.html file locally in your web browser.
+
+
 The data is coming from the Google Trends API, which provides non-normalized search data. The values represent the probability of a search term multiplied by 10 million. Current search queries invesitgated are at the US level, but we get more granualar (regions or DMAs) if needed. For this invesitagtion, we have looked into the following search queries (.csv files of the raw data are attached to this repository):
 
 Home-sharing services: (Airbnb, VRBO, HomeAway, Short-term rentals)
