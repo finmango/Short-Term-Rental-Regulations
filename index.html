@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>U.S. Short-term Rental Regulations Impact Analysis (2010-2024)</title>
+    <title>Short-term Rental Regulations Impact Analysis (2010-2024)</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
@@ -28,35 +28,15 @@
         }
         .chart-container {
             position: relative;
-            height: 0;
+            height: 400px;
             width: 100%;
-            padding-bottom: 75%; /* Aspect ratio 4:3 */
-        }
-        .chart-container canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100% !important;
-            height: 100% !important;
+            margin-bottom: 30px;
         }
         .explanation {
             background-color: #e3f2fd;
             border-left: 4px solid #2196f3;
             padding: 15px;
             margin-top: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
         }
         .logo {
             max-width: 200px;
@@ -68,7 +48,7 @@
                 padding: 15px;
             }
             .chart-container {
-                padding-bottom: 100%; /* Increase aspect ratio for mobile */
+                height: 300px;
             }
         }
     </style>
@@ -76,117 +56,94 @@
 <body>
     <div class="container">
         <img src="finmango.png" alt="FinMango Logo" class="logo">
-        <h1>U.S. Short-term Rental Regulations Impact Analysis (2010-2024)</h1>
-        <p>This analysis, prepared by <a href="https://sglasgow.com" target="_blank">Scott Glasgow</a> (<a href="https://finmango.org" target="_blank">FinMango</a>) for <a href="https://www.ivybusiness.iastate.edu/directory/czhang1/" target="_blank">Chen Zhang, PhD</a> (Iowa State University), examines Google search trends in the United States related to short-term rental regulations, housing affordability, and labor markets over a 15-year period.</p>
+        <h1>Short-term Rental Regulations Impact Analysis (2010-2024)</h1>
+        <p>This analysis, prepared by <a href="https://sglasgow.com" target="_blank">Scott Glasgow</a> (<a href="https://finmango.org" target="_blank">FinMango</a>) for <a href="https://www.ivybusiness.iastate.edu/directory/czhang1/" target="_blank">Chen Zhang, PhD</a> (Iowa State University), examines Google search trends related to short-term rental regulations, housing affordability, and labor markets over a 15-year period.</p>
     </div>
+
     <div class="container">
         <h2>Understanding the Data</h2>
-        <p>The data used in this analysis represents Google search query volumes for various terms related to short-term rentals in the United States from 2010 to 2024. Here's what you need to know:</p>
+        <p>The data used in this analysis represents Google search query volumes for various terms related to short-term rentals from 2010 to 2024. Key points about the data:</p>
         <ul>
-            <li><strong>Data Source:</strong> Google Trends API.</li>
-            <li><strong>Data Format:</strong> The values represent the probability of a search term multiplied by 10 million.</li>
-            <li><strong>Interpretation:</strong> Higher values indicate greater search interest for a particular term relative to all terms searched in the U.S. during that time period.</li>
-            <li><strong>Time Range:</strong> The data covers the period from 2010 to 2024, allowing us to observe long-term trends in public interest regarding these topics.</li>
+            <li><strong>Data Source:</strong> Exclusive access to Google Trends API, providing raw, non-normalized data.</li>
+            <li><strong>Data Format:</strong> Values represent the probability of a search term multiplied by 10 million.</li>
+            <li><strong>Geographical Scope:</strong> Data covers the entire United States.</li>
+            <li><strong>Time Resolution:</strong> Monthly data points from 2010 to 2024.</li>
+            <li><strong>Interpretation:</strong> Higher values indicate a greater probability of the term being searched relative to all US-based searches in that month.</li>
+            <li><strong>Comparability:</strong> The non-normalized nature allows for direct comparison between different search terms and time periods.</li>
         </ul>
     </div>
+
     <div class="container">
-        <h2>Search Interest: Housing Affordability</h2>
+        <h2>Search Interest: Affordable Housing</h2>
         <div class="chart-container">
             <canvas id="housingChart"></canvas>
         </div>
         <div class="explanation">
-            <p>This chart shows the trends in search interest for affordable housing from 2010 to 2024. Key observations:</p>
+            <p>This chart shows the trend in search interest for affordable housing from 2010 to 2024. Key observations:</p>
             <ul>
-                <li>Search interest in affordable housing has generally increased over the 15-year period, indicating growing public concern or awareness.</li>
-                <li>Note that this trend may be influenced by overall increases in housing costs and other economic factors beyond short-term rental regulations.</li>
+                <li>The y-axis represents the probability of the term being searched, multiplied by 10 million.</li>
+                <li>There's a general upward trend in search interest for affordable housing over the 15-year period.</li>
+                <li>Noticeable fluctuations and peaks may correspond to specific events or policy changes affecting housing affordability.</li>
+                <li>The absolute values provide a clear indication of the term's search popularity over time.</li>
             </ul>
         </div>
     </div>
+
     <div class="container">
         <h2>Search Interest: Short-term Rental Regulations</h2>
         <div class="chart-container">
-            <canvas id="regulationChart"></canvas>
+            <canvas id="regulationsChart"></canvas>
         </div>
         <div class="explanation">
             <p>This chart illustrates the trends in search interest for short-term rental laws and Airbnb regulations from 2010 to 2024. Key observations:</p>
             <ul>
-                <li>Interest in short-term rental laws and Airbnb regulations began to appear in searches around 2015, with significant increases after 2020.</li>
-                <li>The rise in searches for regulatory terms may reflect increasing public awareness of policy changes or debates surrounding short-term rentals.</li>
+                <li>The y-axis represents the probability of the terms being searched, multiplied by 10 million.</li>
+                <li>Note the significantly lower scale compared to the affordable housing chart, indicating these are less frequently searched terms.</li>
+                <li>Search interest in these regulatory terms begins to appear around 2015 and shows an increasing trend thereafter.</li>
+                <li>Spikes in search interest may correlate with the introduction of new regulations or public debates on short-term rentals.</li>
             </ul>
         </div>
     </div>
-<div class="container">
-        <h2>Search Interest: Labor Market</h2>
-        <div class="chart-container">
-            <canvas id="laborChart"></canvas>
-        </div>
-        <div class="explanation">
-            <p>This chart illustrates the trends in search interest for hospitality jobs and cleaning services from 2010 to 2024. Key observations:</p>
-            <ul>
-                <li>Search interest in cleaning services has shown a general increase over the 15-year period, potentially indicating growing demand or awareness of these services.</li>
-                <li>Interest in hospitality jobs has fluctuated, with a notable spike in 2020 followed by a sharp decline, possibly reflecting job market changes during the COVID-19 pandemic.</li>
-                <li>These trends may be influenced by factors beyond short-term rental regulations, such as overall economic conditions and public health events.</li>
-            </ul>
-        </div>
-    </div>
-<script>
-// Extended data for charts (2010-2024)
-const data = [
-    {year: 2010, affordableHousing: 115.399164275319, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 51.46087561993374, cleaningServices: 157.81408778299829},
-    {year: 2011, affordableHousing: 109.56786122028467, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 50.39023879751689, cleaningServices: 176.43337599897498},
-    {year: 2012, affordableHousing: 113.74700737179207, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 42.944644376650054, cleaningServices: 186.65452188695397},
-    {year: 2013, affordableHousing: 110.48467323824269, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 40.342625000893975, cleaningServices: 189.8054550695624},
-    {year: 2014, affordableHousing: 129.65277589570394, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 44.79594341418581, cleaningServices: 190.86349636498315},
-    {year: 2015, affordableHousing: 131.7475438853553, shortTermRentalLaws: 0, airbnbRegulations: 0.4987942116854808, hospitalityJobs: 41.5246197654157, cleaningServices: 185.65361630122044},
-    {year: 2016, affordableHousing: 140.5995449162007, shortTermRentalLaws: 0, airbnbRegulations: 0.4988760072311675, hospitalityJobs: 40.10859033181687, cleaningServices: 213.54150575518375},
-    {year: 2017, affordableHousing: 155.35963566937943, shortTermRentalLaws: 0, airbnbRegulations: 1.237074587917812, hospitalityJobs: 36.832256044465055, cleaningServices: 251.68124102202603},
-    {year: 2018, affordableHousing: 159.06869983111304, shortTermRentalLaws: 0, airbnbRegulations: 1.640574275192699, hospitalityJobs: 37.49061266615435, cleaningServices: 247.8389420957562},
-    {year: 2019, affordableHousing: 169.26667714891343, shortTermRentalLaws: 0, airbnbRegulations: 2.762517925069709, hospitalityJobs: 38.286828601686594, cleaningServices: 249.31334054134945},
-    {year: 2020, affordableHousing: 173.07956777999712, shortTermRentalLaws: 0.2989023199772414, airbnbRegulations: 2.7374573367521973, hospitalityJobs: 54.72271728034296, cleaningServices: 291.29901576954666},
-    {year: 2021, affordableHousing: 131.4838125842884, shortTermRentalLaws: 0.35790945103214, airbnbRegulations: 1.924517416426108, hospitalityJobs: 30.40617577230923, cleaningServices: 340.08353409431925},
-    {year: 2022, affordableHousing: 217.16287834738827, shortTermRentalLaws: 0.766430105420579, airbnbRegulations: 3.7444808891378774, hospitalityJobs: 32.61457681066526, cleaningServices: 347.71182772936726},
-    {year: 2023, affordableHousing: 236.5670413498023, shortTermRentalLaws: 0.6673860168824454, airbnbRegulations: 4.1337422690960235, hospitalityJobs: 37.555688573045295, cleaningServices: 367.6084868377735},
-    {year: 2024, affordableHousing: 250.39919617528028, shortTermRentalLaws: 0.41566925946748595, airbnbRegulations: 3.2899786088328287, hospitalityJobs: 42.36997597354586, cleaningServices: 355.9382226907395}
-];
 
-// Housing Affordability Search Interest Chart
-const housingCtx = document.getElementById('housingChart').getContext('2d');
-new Chart(housingCtx, {
-    type: 'line',
-    data: {
-        labels: data.map(d => d.year),
-        datasets: [
-            {
+    <script>
+    // Data will be inserted here in the next part
+    const data = [];
+
+    // Housing Affordability Chart
+    const housingCtx = document.getElementById('housingChart').getContext('2d');
+    new Chart(housingCtx, {
+        type: 'line',
+        data: {
+            labels: data.map(d => d.year),
+            datasets: [{
                 label: 'Affordable Housing',
                 data: data.map(d => d.affordableHousing),
                 borderColor: 'rgb(75, 192, 192)',
                 tension: 0.1
-            }
-        ]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            y: {
-                beginAtZero: true,
-                title: {
-                    display: true,
-                    text: 'Search Interest'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Search Probability (x10^-7)'
+                    }
                 }
             }
         }
-    }
-});
+    });
 
-// Short-term Rental Regulations Search Interest Chart
-const regulationCtx = document.getElementById('regulationChart').getContext('2d');
-new Chart(regulationCtx, {
-    type: 'line',
-    data: {
-        labels: data.map(d => d.year),
-        datasets: [
-            {
+    // Rental Regulations Chart
+    const regulationsCtx = document.getElementById('regulationsChart').getContext('2d');
+    new Chart(regulationsCtx, {
+        type: 'line',
+        data: {
+            labels: data.map(d => d.year),
+            datasets: [{
                 label: 'Short-term Rental Laws',
                 data: data.map(d => d.shortTermRentalLaws),
                 borderColor: 'rgb(255, 99, 132)',
@@ -197,32 +154,87 @@ new Chart(regulationCtx, {
                 data: data.map(d => d.airbnbRegulations),
                 borderColor: 'rgb(54, 162, 235)',
                 tension: 0.1
-            }
-        ]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            y: {
-                beginAtZero: true,
-                title: {
-                    display: true,
-                    text: 'Search Interest'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Search Probability (x10^-7)'
+                    }
                 }
             }
         }
-    }
-});
+    });
+    </script>
+<div class="container">
+        <h2>Search Interest: Labor Market</h2>
+        <div class="chart-container">
+            <canvas id="laborChart"></canvas>
+        </div>
+        <div class="explanation">
+            <p>This chart shows the trends in search interest for hospitality jobs and cleaning services from 2010 to 2024. Key observations:</p>
+            <ul>
+                <li>The y-axis represents the probability of the terms being searched, multiplied by 10 million.</li>
+                <li>Cleaning services consistently show higher search probabilities compared to hospitality jobs.</li>
+                <li>Notable fluctuations in hospitality jobs searches may correlate with economic events or seasonal trends.</li>
+                <li>The trends in these job-related searches can be compared with the regulatory trends to explore potential relationships.</li>
+            </ul>
+        </div>
+    </div>
 
-// Labor Market Search Interest Chart
-const laborCtx = document.getElementById('laborChart').getContext('2d');
-new Chart(laborCtx, {
-    type: 'line',
-    data: {
-        labels: data.map(d => d.year),
-        datasets: [
-            {
+    <div class="container">
+        <h2>Correlation Analysis of Search Interest (2010-2024)</h2>
+        <div id="correlation-table"></div>
+        <div class="explanation">
+            <p>This table shows the correlations between search probabilities for various terms related to short-term rental regulations, housing affordability, and labor market indicators. Key points to consider:</p>
+            <ul>
+                <li>Correlations are based on the raw search probability data, providing insights into how these topics trend together over time.</li>
+                <li>Strong positive correlations might indicate topics that gain or lose public interest simultaneously.</li>
+                <li>Negative correlations could suggest inverse relationships in public interest between topics.</li>
+                <li>These correlations reflect trends in public interest and information-seeking behavior, not necessarily causal relationships in the real world.</li>
+            </ul>
+            <p>Correlation Strength Guide:</p>
+            <ul>
+                <li>0.7 to 1.0 (or -0.7 to -1.0): Strong correlation</li>
+                <li>0.5 to 0.7 (or -0.5 to -0.7): Moderate correlation</li>
+                <li>0.3 to 0.5 (or -0.3 to -0.5): Weak correlation</li>
+                <li>0.0 to 0.3 (or 0.0 to -0.3): Very weak correlation</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+    // Extended data for charts (2010-2024)
+    const data = [
+        {year: 2010, affordableHousing: 115.399164275319, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 51.46087561993374, cleaningServices: 157.81408778299829},
+        {year: 2011, affordableHousing: 109.56786122028467, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 50.39023879751689, cleaningServices: 176.43337599897498},
+        {year: 2012, affordableHousing: 113.74700737179207, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 42.944644376650054, cleaningServices: 186.65452188695397},
+        {year: 2013, affordableHousing: 110.48467323824269, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 40.342625000893975, cleaningServices: 189.8054550695624},
+        {year: 2014, affordableHousing: 129.65277589570394, shortTermRentalLaws: 0, airbnbRegulations: 0, hospitalityJobs: 44.79594341418581, cleaningServices: 190.86349636498315},
+        {year: 2015, affordableHousing: 131.7475438853553, shortTermRentalLaws: 0, airbnbRegulations: 0.4987942116854808, hospitalityJobs: 41.5246197654157, cleaningServices: 185.65361630122044},
+        {year: 2016, affordableHousing: 140.5995449162007, shortTermRentalLaws: 0, airbnbRegulations: 0.4988760072311675, hospitalityJobs: 40.10859033181687, cleaningServices: 213.54150575518375},
+        {year: 2017, affordableHousing: 155.35963566937943, shortTermRentalLaws: 0, airbnbRegulations: 1.237074587917812, hospitalityJobs: 36.832256044465055, cleaningServices: 251.68124102202603},
+        {year: 2018, affordableHousing: 159.06869983111304, shortTermRentalLaws: 0, airbnbRegulations: 1.640574275192699, hospitalityJobs: 37.49061266615435, cleaningServices: 247.8389420957562},
+        {year: 2019, affordableHousing: 169.26667714891343, shortTermRentalLaws: 0, airbnbRegulations: 2.762517925069709, hospitalityJobs: 38.286828601686594, cleaningServices: 249.31334054134945},
+        {year: 2020, affordableHousing: 173.07956777999712, shortTermRentalLaws: 0.2989023199772414, airbnbRegulations: 2.7374573367521973, hospitalityJobs: 54.72271728034296, cleaningServices: 291.29901576954666},
+        {year: 2021, affordableHousing: 131.4838125842884, shortTermRentalLaws: 0.35790945103214, airbnbRegulations: 1.924517416426108, hospitalityJobs: 30.40617577230923, cleaningServices: 340.08353409431925},
+        {year: 2022, affordableHousing: 217.16287834738827, shortTermRentalLaws: 0.766430105420579, airbnbRegulations: 3.7444808891378774, hospitalityJobs: 32.61457681066526, cleaningServices: 347.71182772936726},
+        {year: 2023, affordableHousing: 236.5670413498023, shortTermRentalLaws: 0.6673860168824454, airbnbRegulations: 4.1337422690960235, hospitalityJobs: 37.555688573045295, cleaningServices: 367.6084868377735},
+        {year: 2024, affordableHousing: 250.39919617528028, shortTermRentalLaws: 0.41566925946748595, airbnbRegulations: 3.2899786088328287, hospitalityJobs: 42.36997597354586, cleaningServices: 355.9382226907395}
+    ];
+
+    // Labor Market Chart
+    const laborCtx = document.getElementById('laborChart').getContext('2d');
+    new Chart(laborCtx, {
+        type: 'line',
+        data: {
+            labels: data.map(d => d.year),
+            datasets: [{
                 label: 'Hospitality Jobs',
                 data: data.map(d => d.hospitalityJobs),
                 borderColor: 'rgb(255, 159, 64)',
@@ -233,76 +245,95 @@ new Chart(laborCtx, {
                 data: data.map(d => d.cleaningServices),
                 borderColor: 'rgb(153, 102, 255)',
                 tension: 0.1
-            }
-        ]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            y: {
-                beginAtZero: true,
-                title: {
-                    display: true,
-                    text: 'Search Interest'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Search Probability (x10^-7)'
+                    }
                 }
             }
         }
-    }
-});
+    });
 
-// Function to calculate correlation
-function correlation(x, y) {
-    const n = x.length;
-    let sum_x = 0, sum_y = 0, sum_xy = 0, sum_x2 = 0, sum_y2 = 0;
-    for (let i = 0; i < n; i++) {
-        sum_x += x[i];
-        sum_y += y[i];
-        sum_xy += x[i] * y[i];
-        sum_x2 += x[i] * x[i];
-        sum_y2 += y[i] * y[i];
-    }
-    const numerator = n * sum_xy - sum_x * sum_y;
-    const denominator = Math.sqrt((n * sum_x2 - sum_x * sum_x) * (n * sum_y2 - sum_y * sum_y));
-    return denominator === 0 ? 0 : numerator / denominator;
-}
-
-// Calculate correlations
-const correlationData = [
-    { variable1: 'Short-term rental laws', variable2: 'Affordable housing', correlation: correlation(data.map(d => d.shortTermRentalLaws), data.map(d => d.affordableHousing)) },
-    { variable1: 'Short-term rental laws', variable2: 'Hospitality jobs', correlation: correlation(data.map(d => d.shortTermRentalLaws), data.map(d => d.hospitalityJobs)) },
-    { variable1: 'Short-term rental laws', variable2: 'Cleaning services', correlation: correlation(data.map(d => d.shortTermRentalLaws), data.map(d => d.cleaningServices)) },
-    { variable1: 'Airbnb regulations', variable2: 'Affordable housing', correlation: correlation(data.map(d => d.airbnbRegulations), data.map(d => d.affordableHousing)) },
-    { variable1: 'Airbnb regulations', variable2: 'Hospitality jobs', correlation: correlation(data.map(d => d.airbnbRegulations), data.map(d => d.hospitalityJobs)) },
-    { variable1: 'Airbnb regulations', variable2: 'Cleaning services', correlation: correlation(data.map(d => d.airbnbRegulations), data.map(d => d.cleaningServices)) },
-    { variable1: 'Affordable housing', variable2: 'Hospitality jobs', correlation: correlation(data.map(d => d.affordableHousing), data.map(d => d.hospitalityJobs)) },
-    { variable1: 'Affordable housing', variable2: 'Cleaning services', correlation: correlation(data.map(d => d.affordableHousing), data.map(d => d.cleaningServices)) }
-];
-
-// Function to generate correlation table HTML
-function generateCorrelationTable() {
-    let tableHTML = `
-    <table>
-        <tr>
-            <th>Variable 1</th>
-            <th>Variable 2</th>
-            <th>Correlation</th>
-            <th>Strength</th>
-        </tr>
-    `;
-    correlationData.forEach(item => {
-        let strength;
-        if (Math.abs(item.correlation) >= 0.7) {
-            strength = 'Strong';
-        } else if (Math.abs(item.correlation) >= 0.5) {
-            strength = 'Moderate';
-        } else if (Math.abs(item.correlation) >= 0.3) {
-            strength = 'Weak';
-        } else {
-            strength = 'Very Weak';
+    // Function to calculate correlation
+    function correlation(x, y) {
+        const n = x.length;
+        let sum_x = 0, sum_y = 0, sum_xy = 0, sum_x2 = 0, sum_y2 = 0;
+        for (let i = 0; i < n; i++) {
+            sum_x += x[i];
+            sum_y += y[i];
+            sum_xy += x[i] * y[i];
+            sum_x2 += x[i] * x[i];
+            sum_y2 += y[i] * y[i];
         }
-        tableHTML += `
-        <tr>
-            <td>${item.variable1}</td>
-            <td>${item.variable2}</td>
-            <td>${item.
+        const numerator = n * sum_xy - sum_x * sum_y;
+        const denominator = Math.sqrt((n * sum_x2 - sum_x * sum_x) * (n * sum_y2 - sum_y * sum_y));
+        return denominator === 0 ? 0 : numerator / denominator;
+    }
+
+    // Calculate correlations
+    const correlationData = [
+        { variable1: 'Short-term rental laws', variable2: 'Affordable housing', correlation: correlation(data.map(d => d.shortTermRentalLaws), data.map(d => d.affordableHousing)) },
+        { variable1: 'Short-term rental laws', variable2: 'Hospitality jobs', correlation: correlation(data.map(d => d.shortTermRentalLaws), data.map(d => d.hospitalityJobs)) },
+        { variable1: 'Short-term rental laws', variable2: 'Cleaning services', correlation: correlation(data.map(d => d.shortTermRentalLaws), data.map(d => d.cleaningServices)) },
+        { variable1: 'Airbnb regulations', variable2: 'Affordable housing', correlation: correlation(data.map(d => d.airbnbRegulations), data.map(d => d.affordableHousing)) },
+        { variable1: 'Airbnb regulations', variable2: 'Hospitality jobs', correlation: correlation(data.map(d => d.airbnbRegulations), data.map(d => d.hospitalityJobs)) },
+        { variable1: 'Airbnb regulations', variable2: 'Cleaning services', correlation: correlation(data.map(d => d.airbnbRegulations), data.map(d => d.cleaningServices)) },
+        { variable1: 'Affordable housing', variable2: 'Hospitality jobs', correlation: correlation(data.map(d => d.affordableHousing), data.map(d => d.hospitalityJobs)) },
+        { variable1: 'Affordable housing', variable2: 'Cleaning services', correlation: correlation(data.map(d => d.affordableHousing), data.map(d => d.cleaningServices)) }
+    ];
+
+    // Function to generate correlation table HTML
+    function generateCorrelationTable() {
+        let tableHTML = `
+        <table>
+            <tr>
+                <th>Variable 1</th>
+                <th>Variable 2</th>
+                <th>Correlation</th>
+                <th>Strength</th>
+            </tr>
+        `;
+        correlationData.forEach(item => {
+            let strength;
+            if (Math.abs(item.correlation) >= 0.7) {
+                strength = 'Strong';
+            } else if (Math.abs(item.correlation) >= 0.5) {
+                strength = 'Moderate';
+            } else if (Math.abs(item.correlation) >= 0.3) {
+                strength = 'Weak';
+            } else {
+                strength = 'Very Weak';
+            }
+            tableHTML += `
+            <tr>
+                <td>${item.variable1}</td>
+                <td>${item.variable2}</td>
+                <td>${item.correlation.toFixed(2)}</td>
+                <td>${strength} ${item.correlation >= 0 ? 'Positive' : 'Negative'}</td>
+            </tr>
+            `;
+        });
+        tableHTML += '</table>';
+        return tableHTML;
+    }
+
+    // Generate and insert correlation table
+    document.addEventListener('DOMContentLoaded', function() {
+        const correlationContainer = document.getElementById('correlation-table');
+        if (correlationContainer) {
+            correlationContainer.innerHTML = generateCorrelationTable();
+        } else {
+            console.error('Correlation table container not found');
+        }
+    });
+    </script>
+</body>
+</html>
