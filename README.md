@@ -2,65 +2,29 @@
 
 Puropose of this preliminary research? To help investigate whether and under what circumstances government short-term regulations moderate the impacts of home-sharing services on local housing affordability and labor demands, which may influence income inequality and/or poverty.
 
-The data is coming from the Google Trends API, which provides non-normalized search data. The values represent the probability of a search term multiplied by 10 million. Current search queries invesitgated are at the US level, but we get more granualar (regions or DMAs) is needed. For this invesitagtion, we have looked into the following search queries (.csv files of hte raw data are attached to this repository):
+The data is coming from the Google Trends API, which provides non-normalized search data. The values represent the probability of a search term multiplied by 10 million. Current search queries invesitgated are at the US level, but we get more granualar (regions or DMAs) if needed. For this invesitagtion, we have looked into the following search queries (.csv files of the raw data are attached to this repository):
 
-Home-sharing services:
-  - Airbnb
-  - VRBO
-  - HomeAway
-  - Short-term rentals
+Home-sharing services: (Airbnb, VRBO, HomeAway, Short-term rentals)
 
-Government regulations:
-  - Short-term rental laws
-  - Airbnb regulations
-  - Vacation rental ordinances
-  - Home-sharing restrictions
+Government regulations: (Short-term rental laws, Airbnb regulations, Vacation rental ordinances, Home-sharing restrictions)
 
-Housing affordability:
-  - Affordable housing
-  - Rent prices
-  - Housing costs
-  - Gentrification
+Housing affordability: (Affordable housing, Rent prices, Housing costs, Gentrification)
 
-Labor market:
-  - Hospitality jobs
-  - Cleaning services
-  - Property management
-  - Gig economy work
+Labor market: (Hospitality jobs, Cleaning services, Property management, Gig economy work)
 
-Income inequality and poverty:
-  - Income gap
-  - Wealth disparity
-  - Poverty rate
-  - Economic inequality
+Income inequality and poverty: (Income gap, Wealth disparity, Poverty rate, Economic inequality)
 
-Local community impact:
-  - Neighborhood changes
-  - Community displacement
-  - Local business impact
-  - Tourism effects
+Local community impact: (Neighborhood changes, Community displacement, Local business impact, Tourism effects)
 
-Real estate market:
-  - Property values
-  - Housing inventory
-  - Real estate investments
-  - Rental market trends
+Real estate market: (Property values, Housing inventory, Real estate investments, Rental market trends)
 
-Economic indicators:
-  - Cost of living
-  - Unemployment rate
-  - Median income
-  - Economic growth
+Economic indicators: (Cost of living, Unemployment rate, Median income, Economic growth)
 
-Policy-related terms:
-  - Zoning laws
-  - Housing policy
-  - Urban planning
-  - Economic development
+Policy-related terms: (Zoning laws, Housing policy, Urban planning, Economic development)
 
 How can we imporve the analysis? 
-(1) Include data on actual short-term rental regulations implemented in various localities and compare this to local searching trends. 
-(2) Incorporate economic indicators like median income, Gini coefficient for income inequality, and poverty rates.
-(3) Add data on local crime rates and compare it to realted search queries. 
-(4) Analyze data at a more granular level (e.g., by city or state) to capture local variations in regulations and their impacts.
-(5) It may be good to use more niche terms. There are confounding factors with "afforable housing" and an increase in housing cost overall. 
+  - Include data on actual short-term rental regulations implemented in various localities and compare this to local searching trends.
+  - Incorporate economic indicators like median income, Gini coefficient for income inequality, and poverty rates.
+  - Add data on local crime rates and compare it to realted search queries.
+  - Analyze data at a more granular level (e.g., by city or state) to capture local variations in regulations and their impacts.
+  - It may be good to use more niche terms. There are confounding factors with "afforable housing" and an increase in housing cost overall. 
