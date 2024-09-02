@@ -9,41 +9,49 @@ Home-sharing services:
   - VRBO
   - HomeAway
   - Short-term rentals
+
 Government regulations:
   - Short-term rental laws
   - Airbnb regulations
   - Vacation rental ordinances
   - Home-sharing restrictions
+
 Housing affordability:
   - Affordable housing
   - Rent prices
   - Housing costs
   - Gentrification
+
 Labor market:
   - Hospitality jobs
   - Cleaning services
   - Property management
   - Gig economy work
+
 Income inequality and poverty:
   - Income gap
   - Wealth disparity
   - Poverty rate
   - Economic inequality
+
 Local community impact:
   - Neighborhood changes
   - Community displacement
   - Local business impact
   - Tourism effects
+
 Real estate market:
   - Property values
   - Housing inventory
   - Real estate investments
   - Rental market trends
+
 Economic indicators:
   - Cost of living
   - Unemployment rate
   - Median income
   - Economic growth
+
 Policy-related terms:
   - Zoning laws
   - Housing policy
