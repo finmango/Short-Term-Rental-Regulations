@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Short-term Rental Regulations Impact Analysis (2010-2024)</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             line-height: 1.6;
             color: #333;
             max-width: 1200px;
@@ -22,14 +22,21 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             margin-bottom: 20px;
         }
-        h1, h2 {
+        h1, h2, h3 {
             color: #2c3e50;
         }
-        .chart-container {
-            position: relative;
-            height: 400px;
+        table {
             width: 100%;
-            margin-bottom: 30px;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
         }
         .explanation {
             background-color: #e3f2fd;
@@ -37,271 +44,168 @@
             padding: 15px;
             margin-top: 20px;
         }
+        .logo {
+            max-width: 200px;
+            margin: 0 auto 20px;
+            display: block;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <img src="finmango.png" alt="FinMango Logo" class="logo">
         <h1>Short-term Rental Regulations Impact Analysis (2010-2024)</h1>
-        <p>This analysis examines Google search trends related to short-term rental regulations, income inequality, poverty, and local community impacts over a 15-year period.</p>
+        <p>This analysis, prepared by <a href="https://sglasgow.com" target="_blank">Scott Glasgow</a> (<a href="https://finmango.org" target="_blank">FinMango</a>) for <a href="https://www.ivybusiness.iastate.edu/directory/czhang1/" target="_blank">Chen Zhang, PhD</a> (Iowa State University), examines Google search trends related to short-term rental regulations, housing affordability, and labor markets over a 15-year period.</p>
     </div>
 
     <div class="container">
         <h2>Understanding the Data</h2>
-        <p>The data represents Google search query volumes for various terms related to short-term rentals, income inequality, poverty, and local community impacts from 2010 to 2024. Key points:</p>
+        <p>The data used in this analysis represents Google search query volumes for various terms related to short-term rentals from 2010 to 2024. Key points about the data:</p>
         <ul>
-            <li><strong>Data Source:</strong> Google Trends API, providing raw, non-normalized data.</li>
+            <li><strong>Data Source:</strong> Exclusive access to Google Trends API, providing raw, non-normalized data.</li>
             <li><strong>Data Format:</strong> Values represent the probability of a search term multiplied by 10 million.</li>
             <li><strong>Geographical Scope:</strong> Data covers the entire United States.</li>
             <li><strong>Time Resolution:</strong> Monthly data points from 2010 to 2024.</li>
             <li><strong>Interpretation:</strong> Higher values indicate a greater probability of the term being searched relative to all US-based searches in that month.</li>
+            <li><strong>Comparability:</strong> The non-normalized nature allows for direct comparison between different search terms and time periods.</li>
         </ul>
     </div>
 
     <div class="container">
-        <h2>Short-term Rental Regulations and Housing Affordability</h2>
-        <div class="chart-container">
-            <canvas id="regulationsChart"></canvas>
-        </div>
-        <div class="explanation" id="regulationsExplanation"></div>
-    </div>
-
-    <script>
-    const rawData = [
-        // The data you provided is already included here
-    ];
-
-    const data = [];
-
-    function processData() {
-        rawData.forEach(row => {
-            const date = new Date(row.Date);
-            const year = date.getFullYear();
-            const month = date.getMonth();
-            const term = row.Term;
-            const value = parseFloat(row.Value);
-
-            let yearData = data.find(d => d.year === year);
-            if (!yearData) {
-                yearData = { year: year };
-                data.push(yearData);
-            }
-
-            if (!yearData[term]) {
-                yearData[term] = new Array(12).fill(0);
-            }
-            yearData[term][month] = value;
-        });
-
-        data.sort((a, b) => a.year - b.year);
-    }
-
-    function createRegulationsChart() {
-        const ctx = document.getElementById('regulationsChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: data.map(d => d.year),
-                datasets: [
-                    {
-                        label: 'Short-term Rental Laws',
-                        data: data.map(d => d['Short-term rental laws'] ? d['Short-term rental laws'].reduce((a, b) => a + b, 0) / 12 : 0),
-                        borderColor: 'rgb(255, 99, 132)',
-                        tension: 0.1
-                    },
-                    {
-                        label: 'Airbnb Regulations',
-                        data: data.map(d => d['Airbnb regulations'] ? d['Airbnb regulations'].reduce((a, b) => a + b, 0) / 12 : 0),
-                        borderColor: 'rgb(54, 162, 235)',
-                        tension: 0.1
-                    },
-                    {
-                        label: 'Affordable Housing',
-                        data: data.map(d => d['Affordable housing'] ? d['Affordable housing'].reduce((a, b) => a + b, 0) / 12 : 0),
-                        borderColor: 'rgb(75, 192, 192)',
-                        tension: 0.1
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Average Annual Search Probability (x10^-7)'
-                        }
-                    }
-                }
-            }
-        });
-
-        document.getElementById('regulationsExplanation').innerHTML = `
-            <p>This chart shows the trends in search interest for short-term rental laws, Airbnb regulations, and affordable housing from 2010 to 2024. Key observations:</p>
+        <h2>Search Interest: Affordable Housing</h2>
+        <table>
+            <tr>
+                <th>Year</th>
+                <th>Affordable Housing (Search Probability x10^-7)</th>
+            </tr>
+            <tr><td>2010</td><td>115.399164275319</td></tr>
+            <tr><td>2011</td><td>109.56786122028467</td></tr>
+            <tr><td>2012</td><td>113.74700737179207</td></tr>
+            <tr><td>2013</td><td>110.48467323824269</td></tr>
+            <tr><td>2014</td><td>129.65277589570394</td></tr>
+            <tr><td>2015</td><td>131.7475438853553</td></tr>
+            <tr><td>2016</td><td>140.5995449162007</td></tr>
+            <tr><td>2017</td><td>155.35963566937943</td></tr>
+            <tr><td>2018</td><td>159.06869983111304</td></tr>
+            <tr><td>2019</td><td>169.26667714891343</td></tr>
+            <tr><td>2020</td><td>173.07956777999712</td></tr>
+            <tr><td>2021</td><td>131.4838125842884</td></tr>
+            <tr><td>2022</td><td>217.16287834738827</td></tr>
+            <tr><td>2023</td><td>236.5670413498023</td></tr>
+            <tr><td>2024</td><td>250.39919617528028</td></tr>
+        </table>
+        <div class="explanation">
+            <p>This table shows the trend in search interest for affordable housing from 2010 to 2024. Key observations:</p>
             <ul>
-                <li>Search interest in affordable housing has generally increased over the 15-year period, indicating growing public concern or awareness.</li>
-                <li>Interest in short-term rental laws and Airbnb regulations began to appear in searches around 2015, with significant increases after 2020.</li>
-                <li>The rise in searches for regulatory terms may reflect increasing public awareness of policy changes or debates surrounding short-term rentals.</li>
-                <li>There appears to be a correlation between the rise in regulatory searches and affordable housing searches, suggesting a potential relationship between these topics in public discourse.</li>
+                <li>The values represent the probability of the term being searched, multiplied by 10 million.</li>
+                <li>There's a general upward trend in search interest for affordable housing over the 15-year period.</li>
+                <li>Noticeable fluctuations and peaks may correspond to specific events or policy changes affecting housing affordability.</li>
+                <li>The absolute values provide a clear indication of the term's search popularity over time.</li>
             </ul>
-        `;
-    }
-
-    function initAnalysis() {
-        processData();
-        createRegulationsChart();
-    }
-
-    window.onload = initAnalysis;
-    </script>
-</body>
-</html>
-<div class="container">
-        <h2>Income Inequality and Poverty Trends</h2>
-        <div class="chart-container">
-            <canvas id="inequalityChart"></canvas>
         </div>
-        <div class="explanation" id="inequalityExplanation"></div>
+    </div>
+<div class="container">
+        <h2>Search Interest: Short-term Rental Regulations</h2>
+        <table>
+            <tr>
+                <th>Year</th>
+                <th>Short-term Rental Laws (Search Probability x10^-7)</th>
+                <th>Airbnb Regulations (Search Probability x10^-7)</th>
+            </tr>
+            <tr><td>2010</td><td>0</td><td>0</td></tr>
+            <tr><td>2011</td><td>0</td><td>0</td></tr>
+            <tr><td>2012</td><td>0</td><td>0</td></tr>
+            <tr><td>2013</td><td>0</td><td>0</td></tr>
+            <tr><td>2014</td><td>0</td><td>0</td></tr>
+            <tr><td>2015</td><td>0</td><td>0.4987942116854808</td></tr>
+            <tr><td>2016</td><td>0</td><td>0.4988760072311675</td></tr>
+            <tr><td>2017</td><td>0</td><td>1.237074587917812</td></tr>
+            <tr><td>2018</td><td>0</td><td>1.640574275192699</td></tr>
+            <tr><td>2019</td><td>0</td><td>2.762517925069709</td></tr>
+            <tr><td>2020</td><td>0.2989023199772414</td><td>2.7374573367521973</td></tr>
+            <tr><td>2021</td><td>0.35790945103214</td><td>1.924517416426108</td></tr>
+            <tr><td>2022</td><td>0.766430105420579</td><td>3.7444808891378774</td></tr>
+            <tr><td>2023</td><td>0.6673860168824454</td><td>4.1337422690960235</td></tr>
+            <tr><td>2024</td><td>0.41566925946748595</td><td>3.2899786088328287</td></tr>
+        </table>
+        <div class="explanation">
+            <p>This table illustrates the trends in search interest for short-term rental laws and Airbnb regulations from 2010 to 2024. Key observations:</p>
+            <ul>
+                <li>Note the significantly lower scale compared to the affordable housing data, indicating these are less frequently searched terms.</li>
+                <li>Search interest in these regulatory terms begins to appear around 2015 and shows an increasing trend thereafter.</li>
+                <li>Spikes in search interest may correlate with the introduction of new regulations or public debates on short-term rentals.</li>
+            </ul>
+        </div>
     </div>
 
     <div class="container">
-        <h2>Local Community Impact</h2>
-        <div class="chart-container">
-            <canvas id="communityChart"></canvas>
+        <h2>Search Interest: Labor Market</h2>
+        <table>
+            <tr>
+                <th>Year</th>
+                <th>Hospitality Jobs (Search Probability x10^-7)</th>
+                <th>Cleaning Services (Search Probability x10^-7)</th>
+            </tr>
+            <tr><td>2010</td><td>51.46087561993374</td><td>157.81408778299829</td></tr>
+            <tr><td>2011</td><td>50.39023879751689</td><td>176.43337599897498</td></tr>
+            <tr><td>2012</td><td>42.944644376650054</td><td>186.65452188695397</td></tr>
+            <tr><td>2013</td><td>40.342625000893975</td><td>189.8054550695624</td></tr>
+            <tr><td>2014</td><td>44.79594341418581</td><td>190.86349636498315</td></tr>
+            <tr><td>2015</td><td>41.5246197654157</td><td>185.65361630122044</td></tr>
+            <tr><td>2016</td><td>40.10859033181687</td><td>213.54150575518375</td></tr>
+            <tr><td>2017</td><td>36.832256044465055</td><td>251.68124102202603</td></tr>
+            <tr><td>2018</td><td>37.49061266615435</td><td>247.8389420957562</td></tr>
+            <tr><td>2019</td><td>38.286828601686594</td><td>249.31334054134945</td></tr>
+            <tr><td>2020</td><td>54.72271728034296</td><td>291.29901576954666</td></tr>
+            <tr><td>2021</td><td>30.40617577230923</td><td>340.08353409431925</td></tr>
+            <tr><td>2022</td><td>32.61457681066526</td><td>347.71182772936726</td></tr>
+            <tr><td>2023</td><td>37.555688573045295</td><td>367.6084868377735</td></tr>
+            <tr><td>2024</td><td>42.36997597354586</td><td>355.9382226907395</td></tr>
+        </table>
+        <div class="explanation">
+            <p>This table shows the trends in search interest for hospitality jobs and cleaning services from 2010 to 2024. Key observations:</p>
+            <ul>
+                <li>Cleaning services consistently show higher search probabilities compared to hospitality jobs.</li>
+                <li>Notable fluctuations in hospitality jobs searches may correlate with economic events or seasonal trends.</li>
+                <li>The trends in these job-related searches can be compared with the regulatory trends to explore potential relationships.</li>
+            </ul>
         </div>
-        <div class="explanation" id="communityExplanation"></div>
     </div>
 
-    <script>
-    // ... (previous code remains the same)
-
-    function createInequalityChart() {
-        const ctx = document.getElementById('inequalityChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: data.map(d => d.year),
-                datasets: [
-                    {
-                        label: 'Income Gap',
-                        data: data.map(d => d['Income gap'] ? d['Income gap'].reduce((a, b) => a + b, 0) / 12 : 0),
-                        borderColor: 'rgb(255, 99, 132)',
-                        tension: 0.1
-                    },
-                    {
-                        label: 'Wealth Disparity',
-                        data: data.map(d => d['Wealth disparity'] ? d['Wealth disparity'].reduce((a, b) => a + b, 0) / 12 : 0),
-                        borderColor: 'rgb(54, 162, 235)',
-                        tension: 0.1
-                    },
-                    {
-                        label: 'Poverty Rate',
-                        data: data.map(d => d['Poverty rate'] ? d['Poverty rate'].reduce((a, b) => a + b, 0) / 12 : 0),
-                        borderColor: 'rgb(75, 192, 192)',
-                        tension: 0.1
-                    },
-                    {
-                        label: 'Economic Inequality',
-                        data: data.map(d => d['Economic inequality'] ? d['Economic inequality'].reduce((a, b) => a + b, 0) / 12 : 0),
-                        borderColor: 'rgb(255, 159, 64)',
-                        tension: 0.1
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Average Annual Search Probability (x10^-7)'
-                        }
-                    }
-                }
-            }
-        });
-
-        document.getElementById('inequalityExplanation').innerHTML = `
-            <p>This chart illustrates the trends in search interest for income gap, wealth disparity, poverty rate, and economic inequality from 2010 to 2024. Key observations:</p>
+    <div class="container">
+        <h2>Correlation Analysis of Search Interest (2010-2024)</h2>
+        <table id="correlation-table">
+            <tr>
+                <th>Variable 1</th>
+                <th>Variable 2</th>
+                <th>Correlation</th>
+                <th>Strength</th>
+            </tr>
+            <tr><td>Short-term rental laws</td><td>Affordable housing</td><td>0.54</td><td>Moderate Positive</td></tr>
+            <tr><td>Short-term rental laws</td><td>Hospitality jobs</td><td>-0.13</td><td>Very Weak Negative</td></tr>
+            <tr><td>Short-term rental laws</td><td>Cleaning services</td><td>0.72</td><td>Strong Positive</td></tr>
+            <tr><td>Airbnb regulations</td><td>Affordable housing</td><td>0.81</td><td>Strong Positive</td></tr>
+            <tr><td>Airbnb regulations</td><td>Hospitality jobs</td><td>-0.09</td><td>Very Weak Negative</td></tr>
+            <tr><td>Airbnb regulations</td><td>Cleaning services</td><td>0.89</td><td>Strong Positive</td></tr>
+            <tr><td>Affordable housing</td><td>Hospitality jobs</td><td>-0.22</td><td>Weak Negative</td></tr>
+            <tr><td>Affordable housing</td><td>Cleaning services</td><td>0.94</td><td>Strong Positive</td></tr>
+        </table>
+        <div class="explanation">
+            <p>This table shows the correlations between search probabilities for various terms related to short-term rental regulations, housing affordability, and labor market indicators. Key points to consider:</p>
             <ul>
-                <li>Search interest in poverty rate has shown the highest overall level and variability among these terms.</li>
-                <li>Interest in economic inequality and income gap have generally increased over time, particularly after 2020.</li>
-                <li>Wealth disparity searches show a more modest increase but follow a similar trend to other inequality-related terms.</li>
-                <li>These trends suggest growing public awareness or concern about economic disparities and poverty issues over the 15-year period.</li>
+                <li>Correlations are based on the raw search probability data, providing insights into how these topics trend together over time.</li>
+                <li>Strong positive correlations might indicate topics that gain or lose public interest simultaneously.</li>
+                <li>Negative correlations could suggest inverse relationships in public interest between topics.</li>
+                <li>These correlations reflect trends in public interest and information-seeking behavior, not necessarily causal relationships in the real world.</li>
             </ul>
-        `;
-    }
-
-    function createCommunityChart() {
-        const ctx = document.getElementById('communityChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: data.map(d => d.year),
-                datasets: [
-                    {
-                        label: 'Neighborhood Changes',
-                        data: data.map(d => d['Neighborhood changes'] ? d['Neighborhood changes'].reduce((a, b) => a + b, 0) / 12 : 0),
-                        borderColor: 'rgb(255, 99, 132)',
-                        tension: 0.1
-                    },
-                    {
-                        label: 'Community Displacement',
-                        data: data.map(d => d['Community displacement'] ? d['Community displacement'].reduce((a, b) => a + b, 0) / 12 : 0),
-                        borderColor: 'rgb(54, 162, 235)',
-                        tension: 0.1
-                    },
-                    {
-                        label: 'Local Business Impact',
-                        data: data.map(d => d['Local business impact'] ? d['Local business impact'].reduce((a, b) => a + b, 0) / 12 : 0),
-                        borderColor: 'rgb(75, 192, 192)',
-                        tension: 0.1
-                    },
-                    {
-                        label: 'Tourism Effects',
-                        data: data.map(d => d['Tourism effects'] ? d['Tourism effects'].reduce((a, b) => a + b, 0) / 12 : 0),
-                        borderColor: 'rgb(255, 159, 64)',
-                        tension: 0.1
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Average Annual Search Probability (x10^-7)'
-                        }
-                    }
-                }
-            }
-        });
-
-        document.getElementById('communityExplanation').innerHTML = `
-            <p>This chart shows the trends in search interest for neighborhood changes, community displacement, local business impact, and tourism effects from 2010 to 2024. Key observations:</p>
+            <p>Correlation Strength Guide:</p>
             <ul>
-                <li>Search interest in local business impact and tourism effects has shown the most significant increase over time.</li>
-                <li>Neighborhood changes and community displacement searches have remained relatively low but show a slight upward trend in recent years.</li>
-                <li>The increase in these searches may reflect growing public awareness of the potential impacts of short-term rentals on local communities.</li>
-                <li>The trends suggest that the economic aspects (business and tourism) of short-term rentals have garnered more public attention than social aspects (neighborhood changes and displacement).</li>
+                <li>0.7 to 1.0 (or -0.7 to -1.0): Strong correlation</li>
+                <li>0.5 to 0.7 (or -0.5 to -0.7): Moderate correlation</li>
+                <li>0.3 to 0.5 (or -0.3 to -0.5): Weak correlation</li>
+                <li>0.0 to 0.3 (or 0.0 to -0.3): Very weak correlation</li>
             </ul>
-        `;
-    }
-
-    function initAnalysis() {
-        processData();
-        createRegulationsChart();
-        createInequalityChart();
-        createCommunityChart();
-    }
-
-    window.onload = initAnalysis;
-    </script>
+        </div>
+    </div>
 </body>
 </html>
