@@ -63,3 +63,4 @@ How can we imporve the analysis?
 (2) Incorporate economic indicators like median income, Gini coefficient for income inequality, and poverty rates.
 (3) Add data on local crime rates and compare it to realted search queries. 
 (4) Analyze data at a more granular level (e.g., by city or state) to capture local variations in regulations and their impacts.
+(5) It may be good to use more niche terms. There are confounding factors with "afforable housing" and an increase in housing cost overall. 
