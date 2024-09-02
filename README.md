@@ -3,7 +3,7 @@
 Puropose of this preliminary research? To help investigate whether and under what circumstances government short-term regulations moderate the impacts of home-sharing services on local housing affordability and labor demands, which may influence income inequality and/or poverty.
 
 ## Viewing the Research Findings
-To view the research findings: visit mngo.org/idea2
+To view the research findings: visit mngo.org/idea1
 
 Alternatively, you can clone the repository and open the index.html file locally in your web browser.
 
